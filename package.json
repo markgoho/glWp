@@ -23,7 +23,8 @@
     "@angular/router": "^6.0.0-rc.5",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "@angular/service-worker": "^6.0.0-rc.5"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^6.0.0-rc.5",
