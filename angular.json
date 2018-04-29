@@ -39,7 +39,7 @@
                 "output": "/"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/scss/reboot.scss", "src/styles.scss"],
             "scripts": []
           },
           "configurations": {

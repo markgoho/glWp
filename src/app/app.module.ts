@@ -7,9 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { FooterComponent } from './containers/footer/footer.component';
+import { NavbarComponent } from './containers/navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FooterComponent, NavbarComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'gideon-labs' }),
     AppRoutingModule,

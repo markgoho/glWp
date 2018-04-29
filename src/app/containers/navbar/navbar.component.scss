@@ -1,0 +1,110 @@
+.navbar-brand svg {
+  width: 12em;
+  max-width: 12em;
+}
+
+.navbar {
+  background-color: rgb(255, 255, 255);
+  padding: 2em 0;
+}
+
+.logo {
+  display: inline-grid;
+}
+
+.gideon {
+  font-family: 'FuturaBT-Heavy';
+  font-size: 4em;
+  line-height: 0.7;
+}
+
+.labs {
+  font-size: 0.4em;
+  letter-spacing: 3px;
+  font-family: 'FuturaBT-Book';
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: black;
+}
+
+@supports (grid-area: auto) {
+  .div-logo {
+    grid-template-columns: repeat(6, min-content);
+    .gideon {
+      letter-spacing: -4px;
+      grid-area: 1 / 1 / -1 / -1;
+    }
+    .labs {
+      grid-area: 1 / 1 / -1 / -1;
+      justify-self: end;
+    }
+  }
+
+  .container {
+    grid-column: 2/4;
+  }
+
+  .links {
+    grid-column: 4 / 8;
+    justify-self: end;
+  }
+}
+
+.nav-link {
+  font-size: 1.25em;
+  text-decoration: none;
+  color: rgba(18, 18, 18, 0.5);
+  margin-left: 1.5em;
+
+  &:hover {
+    color: black;
+  }
+}
+
+.call-to-action {
+  color: #fff;
+  background-color: #549431;
+  border-radius: 5px;
+  padding: 0.5em 0.75em;
+  transition: all 0.1s ease;
+
+  &:hover {
+    color: #fff;
+    background-color: #326f12;
+  }
+}
+.grid-container {
+  grid-gap: 5px;
+}
+.griditem1,
+.griditem2,
+.griditem3,
+.griditem4,
+.griditem5,
+.griditem6 {
+  background-color: rgba(25, 25, 25, 0.3);
+  height: 100%;
+}
+
+.griditem1 {
+  grid-area: 1 / 2 / 2 / 3;
+}
+.griditem2 {
+  grid-area: 1 / 3 / 2 / 4;
+}
+.griditem3 {
+  grid-area: 1 / 4 / 2 / 5;
+}
+.griditem4 {
+  grid-area: 1 / 5 / 2 / 6;
+}
+.griditem5 {
+  grid-area: 1 / 6 / 2 / 7;
+}
+.griditem6 {
+  grid-area: 1 / 7 / 2 / 8;
+}

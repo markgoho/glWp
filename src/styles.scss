@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --rgba-primary-0: rgba(56, 42, 41, 1); // Main Primary color */
+  --rgba-primary-1: rgba(134, 105, 103, 1);
+  --rgba-primary-2: rgba(96, 75, 74, 1);
+  --rgba-primary-3: rgba(52, 31, 30, 1);
+  --rgba-primary-4: rgba(47, 23, 21, 1);
+  --rgba-light-0: rgba(195, 184, 186, 1); // Main Primary color */
+  --rgba-light-1: rgba(231, 197, 204, 1);
+  --rgba-light-2: rgba(180, 161, 165, 1);
+  --rgba-light-3: rgba(162, 136, 142, 1);
+  --rgba-light-4: rgba(148, 115, 123, 1);
+}
+
+@font-face {
+  font-family: 'FuturaBT-Book';
+  src: url('/assets/fonts/FuturaBT-Book.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'FuturaBT-Heavy';
+  src: url('/assets/fonts/FuturaBT-Heavy.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'FuturaBT-Light';
+  src: url('/assets/fonts/FuturaBT-Light.woff2') format('woff2');
+}
+
+body {
+  margin: 0;
+  background-color: #f9f8f6;
+  font-family: 'FuturaBT-Book', sans-serif;
+}
+
+html,
+body {
+  text-rendering: optimizeSpeed;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr repeat(6, minmax(auto, 15em)) 1fr;
+  grid-template-rows: auto;
+  align-items: center;
+  > .container {
+    grid-column: 2/8;
+  }
+
+  @media (max-width: 94em) {
+    grid-template-columns: 3em repeat(6, minmax(auto, 15em)) 3em;
+  }
+}
+
+a {
+  background-color: transparent; /* 1 */
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
