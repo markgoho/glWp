@@ -21,10 +21,14 @@
     "@angular/http": "^6.0.0-rc.5",
     "@angular/platform-browser": "^6.0.0-rc.5",
     "@angular/platform-browser-dynamic": "^6.0.0-rc.5",
+    "@angular/platform-server": "^6.0.0-rc.6",
     "@angular/router": "^6.0.0-rc.5",
     "@angular/service-worker": "^6.0.0-rc.5",
+    "@nguniversal/express-engine": "^5.0.0",
+    "@nguniversal/module-map-ngfactory-loader": "^5.0.0",
     "core-js": "^2.5.4",
     "rxjs": "^6.0.0",
+    "ts-loader": "^4.2.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
