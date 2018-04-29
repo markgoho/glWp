@@ -1,0 +1,70 @@
+version: 2
+
+setup: &setup
+  working_directory: ~/glwp
+  docker:
+    - image: circleci/node:8-browsers
+jobs:
+  checkout-and-install:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - glwp-{{ .Branch }}-{{ checksum "package.json" }}
+            - glwp-{{ .Branch }}
+            - glwp-
+      - run: yarn
+      - save_cache:
+          key: glwp-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - "node_modules"
+  test:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          key: glwp-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Run tests
+          command: yarn test
+  build:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          key: glwp-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Production Build
+          command: yarn build
+  deploy:
+    <<: *setup
+    steps:
+      - checkout
+      - restore_cache:
+          key: glwp-{{ .Branch }}-{{ checksum "package.json" }}
+      - run:
+          name: Deploy
+          command: yarn deploy
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - checkout-and-install
+      - test:
+          requires:
+            - checkout-and-install
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+            tags:
+              ignore:
+                - /.*/
