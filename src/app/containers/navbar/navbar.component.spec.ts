@@ -8,9 +8,8 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavbarComponent ]
-    })
-    .compileComponents();
+      declarations: [NavbarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +21,9 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render logo in div', async(() => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.gideon').textContent).toContain('Gideon');
+  }));
 });

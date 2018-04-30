@@ -87,11 +87,16 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": ["styles.scss"],
+            "styles": ["src/scss/reboot.scss", "styles.scss"],
             "scripts": [],
             "assets": [
               {
                 "glob": "favicon.ico",
+                "input": "src/",
+                "output": "/"
+              },
+              {
+                "glob": "manifest.json",
                 "input": "src/",
                 "output": "/"
               },

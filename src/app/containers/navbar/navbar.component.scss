@@ -1,11 +1,11 @@
 .navbar-brand svg {
-  width: 12em;
-  max-width: 12em;
+  width: 12rem;
+  max-width: 12rem;
 }
 
 .navbar {
   background-color: rgb(255, 255, 255);
-  padding: 2em 0;
+  padding: 2rem 0;
 }
 
 .logo {
@@ -14,12 +14,12 @@
 
 .gideon {
   font-family: 'FuturaBT-Heavy';
-  font-size: 4em;
+  font-size: 4rem;
   line-height: 0.7;
 }
 
 .labs {
-  font-size: 0.4em;
+  font-size: 0.4rem;
   letter-spacing: 3px;
   font-family: 'FuturaBT-Book';
   font-weight: bold;
@@ -55,10 +55,10 @@
 }
 
 .nav-link {
-  font-size: 1.25em;
+  font-size: 1.25rem;
   text-decoration: none;
   color: rgba(18, 18, 18, 0.5);
-  margin-left: 1.5em;
+  margin-left: 1.5rem;
 
   &:hover {
     color: black;
@@ -69,7 +69,7 @@
   color: #fff;
   background-color: #549431;
   border-radius: 5px;
-  padding: 0.5em 0.75em;
+  padding: 0.5em 0.75rem;
   transition: all 0.1s ease;
 
   &:hover {
