@@ -25,7 +25,8 @@ export class AppModule {
     @Inject(PLATFORM_ID) private platformId: Object,
     @Inject(APP_ID) private appId: string
   ) {
-    const platform = isPlatformBrowser(platformId) ? 'in the browser' : 'on the server';
-    console.log(`Running ${platform} with appId=${appId}`);
+    const platform = isPlatformBrowser(this.platformId) ? 'in the browser' : 'on the server';
+    // tslint:disable-next-line:no-console
+    console.log(`Running ${platform} with appId=${this.appId}`);
   }
 }

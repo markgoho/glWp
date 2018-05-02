@@ -7,7 +7,7 @@ import { Title, Meta } from '@angular/platform-browser';
 export class SeoService {
   constructor(private meta: Meta, private title: Title) {}
 
-  generateTags(tags) {
+  generateTags(tags: any) {
     // default values
     tags = {
       title: 'Gideon Analytical Labs',

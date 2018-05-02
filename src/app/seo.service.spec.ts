@@ -5,11 +5,14 @@ import { SeoService } from './seo.service';
 describe('SeoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SeoService]
+      providers: [SeoService],
     });
   });
 
-  it('should be created', inject([SeoService], (service: SeoService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([SeoService], (service: SeoService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });
