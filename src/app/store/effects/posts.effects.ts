@@ -24,13 +24,15 @@ export class PostsEffects {
       let params = new HttpParams().set('slug', slug);
       params = params.append('_embed', 'true');
 
-      return this.http.get(`https://admin.gideonlabs.ml/wp-json/wp/v2/posts`, { params }).pipe(
-        map((response: any) => {
-          const [post] = response;
-          return new LoadPostSuccess(post);
-        }),
-        catchError(() => of(new LoadPostFailure()))
-      );
+      return this.http
+        .get(`https://admin.gideonlabs.ml/wp-json/wp/v2/posts`, { params, observe: 'response' })
+        .pipe(
+          map((response: any) => {
+            const [post] = response.body;
+            return new LoadPostSuccess(post);
+          }),
+          catchError(() => of(new LoadPostFailure()))
+        );
     })
   );
 }
