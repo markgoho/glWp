@@ -1,17 +1,25 @@
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export class MockActivatedRoute {
-  private paramsSubject = new BehaviorSubject(this.testParams);
+@Injectable()
+export class ActivatedRouteStub {
+  // ActivatedRoute.params is Observable
+  private subject = new BehaviorSubject(this.testParams);
+  params = this.subject.asObservable();
+
+  // Test parameters
   private _testParams: {};
-
-  params = this.paramsSubject.asObservable();
-
   get testParams() {
     return this._testParams;
   }
 
-  set testParams(newParams: any) {
-    this._testParams = newParams;
-    this.paramsSubject.next(newParams);
+  set testParams(params: {}) {
+    this._testParams = params;
+    this.subject.next(params);
+  }
+
+  // ActivatedRoute.snapshot.params
+  get snapshot() {
+    return { params: this.testParams };
   }
 }
