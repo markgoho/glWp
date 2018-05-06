@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+// From https://goo.gl/KSAhHi
 @Injectable()
 export class ActivatedRouteStub {
   // ActivatedRoute.params is Observable

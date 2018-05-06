@@ -16,6 +16,8 @@
   font-family: 'FuturaBT-Heavy';
   font-size: 4rem;
   line-height: 0.7;
+  letter-spacing: -4px;
+  grid-area: 1 / 1 / -1 / -1;
 }
 
 .labs {
@@ -24,40 +26,45 @@
   font-family: 'FuturaBT-Book';
   font-weight: bold;
   text-transform: uppercase;
+  grid-area: 1 / 1 / -1 / -1;
+  justify-self: end;
 }
 
 .logo-link {
   text-decoration: none;
   color: black;
+  grid-column: 2/4;
 }
 
-@supports (grid-area: auto) {
-  .div-logo {
-    grid-template-columns: repeat(6, min-content);
-    .gideon {
-      letter-spacing: -4px;
-      grid-area: 1 / 1 / -1 / -1;
-    }
-    .labs {
-      grid-area: 1 / 1 / -1 / -1;
-      justify-self: end;
-    }
+.div-logo {
+  grid-template-columns: repeat(6, min-content);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+
+  svg {
+    fill: var(--nav-link);
+    cursor: pointer;
   }
 
-  .logo-link {
-    grid-column: 2/4;
+  svg:hover {
+    fill: black;
   }
+}
 
-  .links {
-    grid-column: 4 / 8;
-    justify-self: end;
-  }
+.links {
+  display: flex;
+  align-items: center;
+  grid-column: 4 / 8;
+  justify-self: end;
 }
 
 .nav-link {
   font-size: 1.25rem;
   text-decoration: none;
-  color: rgba(18, 18, 18, 0.5);
+  color: var(--nav-link);
   margin-left: 1.5rem;
 
   &:hover {
@@ -67,14 +74,14 @@
 
 .call-to-action {
   color: #fff;
-  background-color: #549431;
+  background-color: var(--call-to-action);
   border-radius: 5px;
   padding: 0.5em 0.75rem;
   transition: all 0.1s ease;
 
   &:hover {
     color: #fff;
-    background-color: #326f12;
+    background-color: var(--call-to-action-hover);
   }
 }
 
