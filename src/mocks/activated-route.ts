@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class ActivatedRouteStub {
   // ActivatedRoute.params is Observable
-  private subject = new BehaviorSubject(this.testParams);
+  private subject = new BehaviorSubject<any>(this.testParams);
   params = this.subject.asObservable();
 
   // Test parameters
