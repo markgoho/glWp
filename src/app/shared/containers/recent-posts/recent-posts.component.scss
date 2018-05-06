@@ -3,6 +3,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 3rem;
+
+  @media screen and (max-width: 30rem) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .post {
@@ -24,6 +28,14 @@
 
     &:hover {
       background-color: var(--call-to-action-hover);
+    }
+  }
+
+  img {
+    object-fit: cover;
+
+    @media screen and (max-width: 30rem) {
+      width: calc(100vw - 2rem);
     }
   }
 }

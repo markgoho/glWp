@@ -20,7 +20,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800"
+            "value": "max-age=31536000"
           }
         ]
       },
@@ -29,7 +29,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800"
+            "value": "max-age=31536000"
           }
         ]
       },
@@ -51,7 +51,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800"
+            "value": "max-age=31536000"
           },
           {
             "key": "X-Content-Type-Options",
@@ -68,7 +68,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=604800"
+            "value": "max-age=31536000"
           },
           {
             "key": "X-Content-Type-Options",

@@ -20,6 +20,16 @@
     text-decoration: underline;
     text-decoration-color: var(--rgba-primary-4);
   }
+
+  app-post figure {
+    @media screen and (max-width: 40rem) {
+      max-width: calc(100vw - 2rem);
+    }
+  }
+
+  app-post img {
+    width: 100%;
+  }
 }
 
 h1 {

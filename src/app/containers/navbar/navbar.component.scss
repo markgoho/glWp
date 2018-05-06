@@ -38,11 +38,18 @@
 
 .div-logo {
   grid-template-columns: repeat(6, min-content);
+  @media screen and (max-width: 30rem) {
+    width: 5rem;
+  }
 }
 
 .search-bar {
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 40rem) {
+    display: none;
+  }
 
   svg {
     fill: var(--nav-link);
@@ -59,6 +66,12 @@
   align-items: center;
   grid-column: 4 / 8;
   justify-self: end;
+}
+
+.nav-link:not(.call-to-action) {
+  @media screen and (max-width: 40rem) {
+    display: none;
+  }
 }
 
 .nav-link {
@@ -82,6 +95,14 @@
   &:hover {
     color: #fff;
     background-color: var(--call-to-action-hover);
+  }
+
+  @media screen and (max-width: 40rem) {
+    font-size: 1rem;
+  }
+
+  @media screen and (max-width: 30rem) {
+    display: none;
   }
 }
 

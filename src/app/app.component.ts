@@ -56,6 +56,13 @@ export class AppComponent implements OnInit {
         window.scrollTo(0, 0);
       });
   }
+
+  // @HostListener('window:resize', ['$event'])
+  // onResize(): void {
+  //   console.log('Inner width', window.innerWidth);
+  //   console.log('Outer width', window.outerWidth);
+  // }
+
   getDepth(outlet: any) {
     return outlet.activatedRouteData.depth;
   }

@@ -33,7 +33,7 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-template-rows: repeat(3, 1fr);
 }
 
@@ -41,12 +41,14 @@
   color: white;
 }
 
-.gal-logo {
-  max-width: 350px;
+.container > div {
+  @media screen and (max-width: 40rem) {
+    width: calc(100vw - 2rem);
+  }
 }
 
 .disclaimer {
-  grid-area: 3 / 1 / -1 / -1;
+  grid-column: 1 / -1;
   font-size: 0.8rem;
   line-height: 1.75;
   opacity: 0.3;

@@ -2,34 +2,77 @@
   color: var(--dark-header);
 }
 
-h1 {
-  font-family: 'FuturaBT-Heavy', sans-serif;
-  font-size: 5.625rem;
-  font-weight: 100;
-  letter-spacing: -5px;
-  max-width: 40vw;
-  line-height: 1.111;
-  margin: 0;
-  padding: 0;
-}
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr repeat(6, minmax(auto, 15rem)) 1fr;
+  grid-template-rows: min-content;
+  padding: 3rem 0;
+  min-height: 100vh;
 
-.sub-header {
-  color: #7e8082;
-  max-width: 30vw;
-  font-size: 1.5rem;
-  line-height: 1.333;
-  margin: 1.5em 0;
+  @media (max-width: 94rem) {
+    grid-template-columns: 3rem repeat(6, minmax(auto, 15em)) 3rem;
+  }
+
+  @media screen and (max-width: 48rem) {
+    min-height: unset;
+  }
+
+  @media (max-width: 40rem) {
+    grid-template-columns: 1rem repeat(6, minmax(auto, 15em)) 1rem;
+    padding: 1rem 0;
+  }
+
+  h1 {
+    font-family: 'FuturaBT-Heavy', sans-serif;
+    font-size: 5.625rem;
+    font-weight: 100;
+    letter-spacing: -5px;
+    max-width: 40vw;
+    line-height: 1.111;
+    margin: 0;
+    padding: 0;
+
+    @media screen and (max-width: 70rem) {
+      font-size: 4rem;
+      max-width: unset;
+    }
+
+    @media screen and (max-width: 40rem) {
+      font-size: 2.8rem;
+      letter-spacing: -2px;
+    }
+  }
+
+  .sub-header {
+    color: #7e8082;
+    max-width: 30vw;
+    font-size: 1.5rem;
+    line-height: 1.333;
+    margin: 1.5em 0;
+
+    @media screen and (max-width: 70rem) {
+      max-width: 70vw;
+    }
+
+    @media screen and (max-width: 40rem) {
+      font-size: 1rem;
+    }
+  }
 }
 
 .container {
-  grid-area: 1 / 2 / 2 / 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 2/8;
 }
 
 .hero-image {
-  padding: 2em 0;
-  max-width: 100%;
-  grid-area: 1 / 2 / 2 / 8;
-  justify-self: end;
+  height: calc(100vh - 6rem - 7rem);
+
+  @media screen and (max-width: 48rem) {
+    display: none;
+  }
 }
 
 .call-to-action {
@@ -48,6 +91,17 @@ h1 {
   &:hover {
     background-color: var(--call-to-action-hover);
   }
+
+  @media screen and (max-width: 40rem) {
+    display: none;
+  }
+
+  @media screen and (max-width: 30rem) {
+    display: block;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
 }
 
 .steps {
@@ -56,6 +110,10 @@ h1 {
   background-color: var(--rgba-primary-3);
   color: rgb(255, 255, 255);
   min-height: 100vh;
+
+  @media screen and (max-width: 48rem) {
+    min-height: 50vh;
+  }
 
   h1 {
     max-width: 100%;
@@ -73,6 +131,14 @@ h1 {
   .step3 {
     grid-column: 6 / 8;
   }
+
+  @media screen and (max-width: 40rem) {
+    .step1,
+    .step2,
+    .step3 {
+      grid-column: 2 / 8;
+    }
+  }
 }
 
 .stories {
@@ -80,6 +146,14 @@ h1 {
   padding: 5rem 0;
   color: var(--dark-header);
   min-height: 100vh;
+
+  @media screen and (max-width: 48rem) {
+    min-height: unset;
+  }
+
+  @media screen and (max-width: 40rem) {
+    padding: 1rem 0;
+  }
 
   h1 {
     max-width: 100%;

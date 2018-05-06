@@ -26,7 +26,7 @@ export function reducer(state = initialState, action: PostsActions): PostsState 
     case PostsActionTypes.LoadRecentPostsSuccess: {
       const posts: Post[] = action.payload;
 
-      const entities = posts.reduce((newEntities: { [slug: string]: Post }, post: Post) => {
+      const entities = posts.reduce((newEntities: { [slug: string]: Post }, post: Post): any => {
         return {
           ...newEntities,
           [post.slug]: post,
