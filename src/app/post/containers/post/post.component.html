@@ -1,0 +1,10 @@
+<div class="grid-container above-fold">
+  <ng-container *ngIf="post$ | async as post">
+    <div class="container">
+      <h1>{{post.title.rendered}}</h1>
+
+      <div class="post-container"
+           [innerHtml]="post.content.rendered"></div>
+    </div>
+  </ng-container>
+</div>

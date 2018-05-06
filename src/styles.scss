@@ -62,3 +62,7 @@ ol {
   margin: 0;
   padding: 0;
 }
+
+.above-fold {
+  min-height: calc(100vh - 7rem);
+}

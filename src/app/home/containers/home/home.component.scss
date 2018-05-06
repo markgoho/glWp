@@ -2,14 +2,6 @@
   color: #54575a;
 }
 
-.grid-container {
-  grid-gap: 5px;
-}
-
-.above-fold {
-  min-height: calc(100vh - 7em);
-}
-
 h1 {
   font-family: 'FuturaBT-Heavy', sans-serif;
   font-size: 5.625rem;
@@ -46,7 +38,7 @@ h1 {
   background-color: #549431;
   font-family: 'FuturaBT-Book', sans-serif;
   font-size: 1.75rem;
-  padding: 0.75em 1rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 7px;
   color: white;
   text-decoration: none;
