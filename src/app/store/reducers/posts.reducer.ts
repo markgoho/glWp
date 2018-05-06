@@ -15,6 +15,7 @@ export const initialState: PostsState = {
 
 export function reducer(state = initialState, action: PostsActions): PostsState {
   switch (action.type) {
+    case PostsActionTypes.LoadRecentPosts:
     case PostsActionTypes.LoadPost: {
       return {
         ...state,
@@ -22,23 +23,22 @@ export function reducer(state = initialState, action: PostsActions): PostsState 
       };
     }
 
-    // case PostsActions.LoadPostsSuccess: {
-    //   const post = action.payload;
+    case PostsActionTypes.LoadRecentPostsSuccess: {
+      const posts: Post[] = action.payload;
 
-    //   const entities = helpAssets.reduce((newEntities: { [slug: string]: Post }, post: Post) => {
-    //     return {
-    //       ...newEntities,
-    //       [post.slug]: post,
-    //     };
-    //   }, {});
+      const entities = posts.reduce((newEntities: { [slug: string]: Post }, post: Post) => {
+        return {
+          ...newEntities,
+          [post.slug]: post,
+        };
+      }, {});
 
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     loaded: true,
-    //     entities,
-    //   };
-    // }
+      return {
+        ...state,
+        loading: false,
+        entities,
+      };
+    }
 
     case PostsActionTypes.LoadPostSuccess: {
       const post = action.payload;

@@ -10,12 +10,13 @@
 }
 
 ::ng-deep {
-  p {
+  app-post p {
+    font-family: 'FuturaBT-Light';
     font-size: 1.25rem;
     grid-column: 1 / -1;
   }
 
-  a {
+  app-post a {
     text-decoration: underline;
     text-decoration-color: var(--rgba-primary-4);
   }

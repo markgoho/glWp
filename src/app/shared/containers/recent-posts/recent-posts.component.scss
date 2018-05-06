@@ -1,0 +1,29 @@
+:host {
+  padding-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  button {
+    box-shadow: none;
+    border: none;
+    background-color: var(--call-to-action);
+    font-family: 'FuturaBT-Book', sans-serif;
+    padding: 0.25rem 0.75rem;
+    border-radius: 3px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.1s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--call-to-action-hover);
+    }
+  }
+}

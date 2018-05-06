@@ -1,7 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { trigger, transition, group, query, style, animate } from '@angular/animations';
 import { filter } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { PostsState } from './store/reducers/posts.reducer';
+import { LoadRecentPosts } from './store/actions/posts.actions';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,8 +48,8 @@ import { filter } from 'rxjs/operators';
     ]),
   ],
 })
-export class AppComponent {
-  constructor(private router: Router) {
+export class AppComponent implements OnInit {
+  constructor(private router: Router, private store: Store<PostsState>) {
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -55,5 +58,9 @@ export class AppComponent {
   }
   getDepth(outlet: any) {
     return outlet.activatedRouteData.depth;
+  }
+
+  ngOnInit() {
+    this.store.dispatch(new LoadRecentPosts());
   }
 }

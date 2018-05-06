@@ -1,5 +1,5 @@
 :host {
-  color: #54575a;
+  color: var(--dark-header);
 }
 
 h1 {
@@ -35,7 +35,7 @@ h1 {
 .call-to-action {
   box-shadow: none;
   border: none;
-  background-color: #549431;
+  background-color: var(--call-to-action);
   font-family: 'FuturaBT-Book', sans-serif;
   font-size: 1.75rem;
   padding: 0.75rem 1.5rem;
@@ -44,40 +44,49 @@ h1 {
   text-decoration: none;
   transition: all 0.1s ease;
   cursor: pointer;
-}
 
-.call-to-action:hover {
-  background-color: #326f12;
-}
-
-.underlay {
-  grid-column: 2 / 8;
-  grid-row: 1 / -1;
-  background-color: pink;
-  border: 1px solid red;
-  max-height: 100%;
+  &:hover {
+    background-color: var(--call-to-action-hover);
+  }
 }
 
 .steps {
+  grid-template-rows: min-content;
+  padding: 5rem 0 0;
   background-color: var(--rgba-primary-3);
   color: rgb(255, 255, 255);
-  // padding: 2rem;
   min-height: 100vh;
 
   h1 {
     max-width: 100%;
     grid-column: 2/8;
   }
+
+  .step1 {
+    grid-column: 2 / 4;
+  }
+
+  .step2 {
+    grid-column: 4 / 6;
+  }
+
+  .step3 {
+    grid-column: 6 / 8;
+  }
 }
 
-.step1 {
-  grid-column: 2 / 4;
-}
+.stories {
+  grid-template-rows: min-content;
+  padding: 5rem 0;
+  color: var(--dark-header);
+  min-height: 100vh;
 
-.step2 {
-  grid-column: 4 / 6;
-}
+  h1 {
+    max-width: 100%;
+    grid-column: 2/8;
+  }
 
-.step3 {
-  grid-column: 6 / 8;
+  app-recent-posts {
+    grid-column: 2/8;
+  }
 }

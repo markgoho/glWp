@@ -96,7 +96,7 @@ export interface Post {
       }
     ];
   };
-  _embedded: {
+  _embedded?: {
     author: [
       {
         id: number;
