@@ -2,7 +2,8 @@
 
   <div class="post"
        *ngFor="let post of posts">
-    <img [src]="post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url">
+    <img *ngIf="inView$ | async"
+         [src]="post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url">
     <p>{{post.excerpt.rendered | excerpt}}</p>
     <a [routerLink]="['/posts', post.slug]">
       <button type="button">Read more</button>
