@@ -21,7 +21,7 @@ export class PostGuard implements CanActivate {
           this.store.dispatch(new LoadPost(slug));
         }
       }),
-      filter((posts: { [slug: string]: Post }) => !!posts[slug]),
+      filter((posts: { [slug: string]: Post }) => posts[slug] != null),
       take(1)
     );
   }
