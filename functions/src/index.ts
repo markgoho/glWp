@@ -21,4 +21,4 @@ app.get('*', (req, res) => {
 });
 
 // Expose Express API as a single Cloud Function:
-exports.myAwesomeFunction = functions.https.onRequest(app);
+exports.api = functions.https.onRequest(app);
