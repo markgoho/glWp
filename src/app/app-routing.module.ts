@@ -9,6 +9,11 @@ const routes: Routes = [
     data: { depth: 1 },
   },
   {
+    path: 'posts/category',
+    loadChildren: './category/category.module#CategoryModule',
+    data: { depth: 2 },
+  },
+  {
     path: 'posts',
     loadChildren: './post/post.module#PostModule',
     data: { depth: 2 },

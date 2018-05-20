@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { PostsState } from './store/reducers/posts.reducer';
 import { LoadRecentPosts } from './store/actions/posts.actions';
+import { LoadCategories } from './store/actions/categories.actions';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,5 +70,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadRecentPosts());
+    this.store.dispatch(new LoadCategories());
   }
 }

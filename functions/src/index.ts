@@ -23,6 +23,22 @@ app.get('/api/posts', async (req, res) => {
   return res.status(200).json(posts);
 });
 
+app.get('/api/recent-posts', async (req, res) => {
+  let recentPosts;
+
+  if (cache.get('recentPosts')) {
+    recentPosts = cache.get('recentPosts');
+  } else {
+    recentPosts = await rp(
+      'https://admin.gideonlabs.ml/wp-json/wp/v2/posts?per_page=8&_embed=true',
+      { json: true }
+    );
+    cache.put('recentPosts', recentPosts, cacheTimeout);
+  }
+  res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
+  return res.status(200).json(recentPosts);
+});
+
 app.get('/api/categories', async (req, res) => {
   let allCategories;
 
@@ -44,7 +60,7 @@ app.get('/api/categories', async (req, res) => {
     );
     cache.put('categories', allCategories, cacheTimeout);
   }
-  // res.set('Cache-Control', 'public, max-age=600, s-maxage=1200');
+  res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
   return res.status(200).json(allCategories);
 });
 

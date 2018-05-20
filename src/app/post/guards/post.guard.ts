@@ -9,7 +9,9 @@ import { switchMap, catchError, tap, filter, take } from 'rxjs/operators';
 import { Post } from '../models/post.interface';
 import { LoadPost } from '../../store/actions/posts.actions';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class PostGuard implements CanActivate {
   constructor(private store: Store<PostsState>) {}
 
