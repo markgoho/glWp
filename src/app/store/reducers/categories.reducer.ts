@@ -15,15 +15,14 @@ export const initialState: CategoriesState = {
 
 export function reducer(state = initialState, action: CategoriesActions): CategoriesState {
   switch (action.type) {
-    case CategoriesActionTypes.LoadRecentCategories:
-    case CategoriesActionTypes.LoadPost: {
+    case CategoriesActionTypes.LoadCategories: {
       return {
         ...state,
         loading: true,
       };
     }
 
-    case CategoriesActionTypes.LoadRecentCategoriesSuccess: {
+    case CategoriesActionTypes.LoadCategoriesSuccess: {
       const categories: Category[] = action.payload;
 
       const entities = categories.reduce(
@@ -43,34 +42,10 @@ export function reducer(state = initialState, action: CategoriesActions): Catego
       };
     }
 
-    case CategoriesActionTypes.LoadCategorySuccess: {
-      const post = action.payload;
-
-      const entities = {
-        ...state.entities,
-        [post.slug]: post,
-      };
-
-      return {
-        ...state,
-        entities,
-        loading: false,
-      };
-    }
-
-    // case PostsActionTypes.HelpAssetSearchQuery: {
-    //   const query = action.payload;
-
-    //   return {
-    //     ...state,
-    //     query,
-    //   };
-    // }
-
     default:
       return state;
   }
 }
 
-export const getCategoryEntities = (state: CategoriesState) => state.entities;
-export const getCategoryLoading = (state: CategoriesState) => state.loading;
+export const getCategoriesEntities = (state: CategoriesState) => state.entities;
+export const getCategoriesLoading = (state: CategoriesState) => state.loading;

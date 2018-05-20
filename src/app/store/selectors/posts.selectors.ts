@@ -6,7 +6,7 @@ import { Post } from '../../post/models/post.interface';
 export const getPostsEntities = createSelector(fromRoot.getPostsState, fromPosts.getPostEntities);
 
 export const getPostsArray = createSelector(getPostsEntities, entities => {
-  return Object.keys(entities).map(id => entities[id]);
+  return Object.keys(entities).map(slug => entities[slug]);
 });
 
 export const getRecentPosts = createSelector(getPostsArray, (posts: Post[]) => {
