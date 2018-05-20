@@ -5,12 +5,13 @@
 /dist
 /tmp
 /out-tsc
+/functions/lib/**
 
 # dependencies
 
 /node_modules
 /functions/node_modules
-/functions/lib
+
 
 # IDEs and editors
 
@@ -21,6 +22,7 @@
 _.launch
 .settings/
 _.sublime-workspace
+*.map
 
 # IDE - VSCode
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import {
@@ -50,6 +50,19 @@ export class PostsEffects {
           }),
           catchError(() => of(new LoadPostFailure()))
         );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  loadRecentPostsSuccess$ = this.actions$.pipe(
+    ofType(PostsActionTypes.LoadRecentPostsSuccess),
+    switchMap(() => {
+      return (
+        this.http
+          .get(`https://deployment-mg.firebaseapp.com/api/posts`)
+          // tslint:disable-next-line:no-console
+          .pipe(tap((response: any) => console.log(response)))
+      );
     })
   );
 }
