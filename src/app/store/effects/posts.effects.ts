@@ -59,7 +59,7 @@ export class PostsEffects {
     switchMap(() => {
       return (
         this.http
-          .get(`https://deployment-mg.firebaseapp.com/api`)
+          .get(`https://deployment-mg.firebaseapp.com/api/posts`)
           // tslint:disable-next-line:no-console
           .pipe(tap((response: any) => console.log(response)))
       );
