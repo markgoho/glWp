@@ -52,12 +52,12 @@ workflows:
   build-and-deploy:
     jobs:
       - checkout-and-install
-      - test:
-          requires:
-            - checkout-and-install
+      # - test:
+      #     requires:
+      #       - checkout-and-install
       - build:
           requires:
-            - test
+            - checkout-and-install
       - deploy:
           requires:
             - build
