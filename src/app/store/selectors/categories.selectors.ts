@@ -1,9 +1,9 @@
 import { createSelector } from '@ngrx/store';
-import * as fromRoot from '../reducers';
+import { getCategoriesState } from '../reducers';
 import * as fromCategories from '../reducers/categories.reducer';
 
 export const getCategoriesEntities = createSelector(
-  fromRoot.getCategoriesState,
+  getCategoriesState,
   fromCategories.getCategoriesEntities
 );
 
