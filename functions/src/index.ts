@@ -88,13 +88,23 @@ export const updateCategories = functions.https.onRequest(async (req, res) => {
     { json: true }
   );
 
+  const finalCategories = allCategories.map((category: any) => {
+    return {
+      count: category.count,
+      description: category.description,
+      parent: category.parent,
+      slug: category.slug,
+      name: category.name,
+    };
+  });
+
   const catRef = db.collection('categories');
 
-  const catLength = allCategories.length;
+  const catLength = finalCategories.length;
 
   for (let i = 0; i < catLength; ++i) {
-    const catSlug = allCategories[i].slug;
-    await catRef.doc(catSlug).set(allCategories[i]);
+    const catSlug = finalCategories[i].slug;
+    await catRef.doc(catSlug).set(finalCategories[i]);
   }
 
   return res.status(200).send(`Categories updated.`);

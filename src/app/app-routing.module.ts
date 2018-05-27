@@ -6,17 +6,17 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     loadChildren: './home/home.module#HomeModule',
-    data: { depth: 1 },
+    data: { depth: 0 },
   },
   {
     path: 'posts/category',
     loadChildren: './category/category.module#CategoryModule',
-    data: { depth: 2 },
+    data: { depth: 1 },
   },
   {
     path: 'posts',
     loadChildren: './post/post.module#PostModule',
-    data: { depth: 2 },
+    data: { depth: 1 },
   },
   {
     path: '**',

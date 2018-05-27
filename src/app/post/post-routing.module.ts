@@ -13,6 +13,7 @@ const routes: Routes = [
     path: ':postSlug',
     component: PostComponent,
     canActivate: [PostGuard],
+    data: { depth: 3 },
   },
 ];
 

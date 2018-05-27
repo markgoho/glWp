@@ -14,7 +14,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
   animations: [
     trigger('routeAnimation', [
-      transition('1 => 2, 2 => 3', [
+      transition('0 => 1, 1 => 2, 2 => 3, 0 => *', [
         style({ height: '!' }),
         query(':enter', style({ transform: 'translateX(100%)' })),
         query(':enter, :leave', style({ position: 'absolute', top: 0, left: 0, right: 0 })),
@@ -30,7 +30,7 @@ import { filter } from 'rxjs/operators';
           ),
         ]),
       ]),
-      transition('3 => 2, 2 => 1', [
+      transition('3 => 2, 2 => 1, 1 => 0, * => 0', [
         style({ height: '!' }),
         query(':enter', style({ transform: 'translateX(-100%)' })),
         query(':enter, :leave', style({ position: 'absolute', top: 0, left: 0, right: 0 })),

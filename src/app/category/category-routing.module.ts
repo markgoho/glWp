@@ -7,10 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: CategoryListComponent,
+    data: { depth: 1 },
   },
   {
     path: ':categorySlug',
     component: CategoryComponent,
+    data: { depth: 2 },
   },
 ];
 
