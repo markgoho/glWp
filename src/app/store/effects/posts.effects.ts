@@ -10,7 +10,7 @@ import {
   LoadPost,
   LoadPostSuccess,
   LoadPostFailure,
-  LoadRecentPostsSuccess,
+  LoadPostsSuccess,
 } from '../actions/posts.actions';
 
 @Injectable()
@@ -41,7 +41,7 @@ export class PostsEffects {
     switchMap(() => {
       return this.http.get(`https://deployment-mg.firebaseapp.com/api/recent-posts`).pipe(
         map((response: any) => {
-          return new LoadRecentPostsSuccess(response);
+          return new LoadPostsSuccess(response);
         }),
         catchError(() => of(new LoadPostFailure()))
       );

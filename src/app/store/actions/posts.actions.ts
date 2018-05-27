@@ -3,7 +3,7 @@ import { Post } from '../../post/models/post.interface';
 
 export enum PostsActionTypes {
   LoadRecentPosts = '[Posts] Load Recent Posts',
-  LoadRecentPostsSuccess = '[Posts] Load Recent Posts Success',
+  LoadPostsSuccess = '[Posts] Load Posts Success',
   LoadPost = '[Posts] Load Single Post',
   LoadPostSuccess = '[Posts] Load Single Post Success',
   LoadPostFailure = '[Posts] Load Single Post Failure',
@@ -13,8 +13,8 @@ export class LoadRecentPosts implements Action {
   readonly type = PostsActionTypes.LoadRecentPosts;
 }
 
-export class LoadRecentPostsSuccess implements Action {
-  readonly type = PostsActionTypes.LoadRecentPostsSuccess;
+export class LoadPostsSuccess implements Action {
+  readonly type = PostsActionTypes.LoadPostsSuccess;
   constructor(public payload: Post[]) {}
 }
 
@@ -37,4 +37,4 @@ export type PostsActions =
   | LoadPostSuccess
   | LoadPostFailure
   | LoadRecentPosts
-  | LoadRecentPostsSuccess;
+  | LoadPostsSuccess;

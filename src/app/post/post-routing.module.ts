@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PostsComponent } from './containers/posts/posts.component';
 import { PostComponent } from './containers/post/post.component';
-import { PostGuard } from './guards/post.guard';
+// import { PostGuard } from './guards/post.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: ':postSlug',
     component: PostComponent,
-    canActivate: [PostGuard],
+    // canActivate: [PostGuard],
     data: { depth: 3 },
   },
 ];
@@ -20,6 +20,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [PostGuard],
+  // providers: [PostGuard],
 })
 export class PostRoutingModule {}

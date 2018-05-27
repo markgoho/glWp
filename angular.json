@@ -109,5 +109,10 @@
   "defaultProject": "glWp",
   "cli": {
     "packageManager": "yarn"
+  },
+  "schematics": {
+    "@schematics/angular:service": {
+      "spec": false
+    }
   }
 }

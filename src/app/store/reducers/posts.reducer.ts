@@ -15,15 +15,15 @@ export const initialState: PostsState = {
 
 export function reducer(state = initialState, action: PostsActions): PostsState {
   switch (action.type) {
-    case PostsActionTypes.LoadRecentPosts:
-    case PostsActionTypes.LoadPost: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
+    // case PostsActionTypes.LoadRecentPosts:
+    // case PostsActionTypes.LoadPost: {
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //   };
+    // }
 
-    case PostsActionTypes.LoadRecentPostsSuccess: {
+    case PostsActionTypes.LoadPostsSuccess: {
       const posts: Post[] = action.payload;
 
       const entities = posts.reduce((newEntities: { [slug: string]: Post }, post: Post): any => {
@@ -40,20 +40,20 @@ export function reducer(state = initialState, action: PostsActions): PostsState 
       };
     }
 
-    case PostsActionTypes.LoadPostSuccess: {
-      const post = action.payload;
+    // case PostsActionTypes.LoadPostSuccess: {
+    //   const post = action.payload;
 
-      const entities = {
-        ...state.entities,
-        [post.slug]: post,
-      };
+    //   const entities = {
+    //     ...state.entities,
+    //     [post.slug]: post,
+    //   };
 
-      return {
-        ...state,
-        entities,
-        loading: false,
-      };
-    }
+    //   return {
+    //     ...state,
+    //     entities,
+    //     loading: false,
+    //   };
+    // }
 
     // case PostsActionTypes.HelpAssetSearchQuery: {
     //   const query = action.payload;

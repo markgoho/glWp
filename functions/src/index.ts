@@ -4,6 +4,8 @@ import * as functions from 'firebase-functions';
 import * as rp from 'request-promise-native';
 // import * as cache from 'memory-cache';
 import * as admin from 'firebase-admin';
+import { Category } from './models/category.interface';
+import { Post } from './models/post.interface';
 
 admin.initializeApp();
 
@@ -72,7 +74,7 @@ const db = admin.firestore();
 // // Expose Express API as a single Cloud Function:
 // export const api = functions.https.onRequest(app);
 export const updateCategories = functions.https.onRequest(async (req, res) => {
-  let allCategories: any[];
+  let allCategories: Category[];
 
   const options = {
     method: 'GET',
@@ -88,8 +90,9 @@ export const updateCategories = functions.https.onRequest(async (req, res) => {
     { json: true }
   );
 
-  const finalCategories = allCategories.map((category: any) => {
+  const finalCategories = allCategories.map((category: Category) => {
     return {
+      id: category.id,
       count: category.count,
       description: category.description,
       parent: category.parent,
@@ -111,7 +114,7 @@ export const updateCategories = functions.https.onRequest(async (req, res) => {
 });
 
 export const updatePosts = functions.https.onRequest(async (req, res) => {
-  let allPosts: any[];
+  let allPosts: Post[];
 
   const options = {
     method: 'GET',
@@ -133,7 +136,7 @@ export const updatePosts = functions.https.onRequest(async (req, res) => {
   allPosts = await Promise.all(postRequests);
 
   const flattenedPosts = allPosts.reduce((acc, curr) => acc.concat(curr), []);
-  const finalPosts = flattenedPosts.map((post: any) => {
+  const finalPosts = flattenedPosts.map((post: Post) => {
     const postCategories =
       post._embedded['wp:term'] && post._embedded['wp:term'].length && post._embedded['wp:term'][0];
     const newCategories: string[] = postCategories && postCategories.map((cat: any) => cat.slug);
@@ -159,6 +162,7 @@ export const updatePosts = functions.https.onRequest(async (req, res) => {
     };
 
     const newPost = {
+      id: post.id,
       date: post.date_gmt,
       modified: post.modified_gmt,
       slug: post.slug,
