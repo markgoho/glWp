@@ -30,7 +30,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production ? [store
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     BrowserAnimationsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production,
