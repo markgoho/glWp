@@ -115,11 +115,6 @@
     min-height: 50vh;
   }
 
-  h1 {
-    max-width: 100%;
-    grid-column: 2/8;
-  }
-
   .step1 {
     grid-column: 2 / 4;
   }
@@ -155,12 +150,20 @@
     padding: 1rem 0;
   }
 
-  h1 {
-    max-width: 100%;
-    grid-column: 2/8;
-  }
-
   app-recent-posts {
     grid-column: 2/8;
   }
+}
+
+.section-header {
+  max-width: 100%;
+  grid-column: 2/8;
+  font-family: 'FuturaBT-Heavy', sans-serif;
+  font-size: 3rem;
+  font-weight: 100;
+  letter-spacing: -1px;
+  max-width: 40vw;
+  line-height: 1.111;
+  margin: 0;
+  padding: 0;
 }

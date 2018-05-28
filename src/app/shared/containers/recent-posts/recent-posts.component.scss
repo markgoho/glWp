@@ -13,14 +13,49 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
+  height: 30rem;
+  border-radius: 3px;
+  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 
-  button {
-    box-shadow: none;
-    border: none;
+  .img-container {
+    position: relative;
+    height: 50%;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    @media screen and (max-width: 30rem) {
+      width: calc(100vw - 2rem);
+    }
+  }
+
+  .post-text {
+    padding: 1rem;
+  }
+
+  .post-title {
+    margin: 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgb(100, 100, 100);
+  }
+
+  .read-more {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    right: 20px;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    transform: translateY(50%);
     background-color: var(--call-to-action);
-    font-family: 'FuturaBT-Book', sans-serif;
-    padding: 0.25rem 0.75rem;
-    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     color: white;
     text-decoration: none;
     transition: all 0.1s ease;
@@ -31,11 +66,16 @@
     }
   }
 
-  img {
-    object-fit: cover;
+  .svg-container {
+    background-color: var(--rgba-primary-4);
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    @media screen and (max-width: 30rem) {
-      width: calc(100vw - 2rem);
-    }
+  .svg-container svg {
+    width: 50%;
   }
 }

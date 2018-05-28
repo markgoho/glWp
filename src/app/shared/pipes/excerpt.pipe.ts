@@ -5,12 +5,17 @@ function parse(content: string): Document {
   return parser.parseFromString(content, 'text/html');
 }
 
+function shorten(str: string, maxLen: number, separator = ' '): string {
+  return str.length <= maxLen ? str : str.substr(0, str.lastIndexOf(separator, maxLen));
+}
+
 @Pipe({
   name: 'excerpt',
 })
 export class ExcerptPipe implements PipeTransform {
   transform(value: any): any {
     const doc = parse(value);
-    return doc.body.children[0].textContent;
+    const content = doc.body.children[0].textContent;
+    return `${shorten(content, 150)}...`;
   }
 }
