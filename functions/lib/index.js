@@ -82,6 +82,7 @@ exports.updateCategories = functions.https.onRequest((req, res) => __awaiter(thi
     allCategories = yield rp(`https://admin.gideonlabs.ml/wp-json/wp/v2/categories?per_page=${totalNumber}`, { json: true });
     const finalCategories = allCategories.map((category) => {
         return {
+            id: category.id,
             count: category.count,
             description: category.description,
             parent: category.parent,
@@ -131,6 +132,7 @@ exports.updatePosts = functions.https.onRequest((req, res) => __awaiter(this, vo
             image: featuredMedia.media_details.sizes.medium || featuredMedia.media_details.sizes.full,
         };
         const newPost = {
+            id: post.id,
             date: post.date_gmt,
             modified: post.modified_gmt,
             slug: post.slug,
