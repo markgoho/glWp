@@ -8,9 +8,9 @@
     "comment-format": [true, "check-space"],
     "curly": true,
     "cyclomatic-complexity": true,
-    "deprecation": {
-      "severity": "warn"
-    },
+    // "deprecation": {
+    //   "severity": "warn"
+    // },
     "eofline": true,
     "forin": true,
     "import-blacklist": [true, "rxjs/Rx"],
@@ -39,7 +39,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [true, "ignore-params"],
-    "no-inferred-empty-object-type": true,
+    // "no-inferred-empty-object-type": true,
     "no-invalid-template-strings": true,
     "no-invalid-this": true,
     "no-misused-new": true,
@@ -53,9 +53,9 @@
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
     "no-unnecessary-callback-wrapper": true,
-    "no-unnecessary-qualifier": true,
+    // "no-unnecessary-qualifier": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
+    // "no-use-before-declare": true,
     "no-var-keyword": true,
     // "object-literal-sort-keys": [true, "ignore-case"],
     "object-literal-shorthand": true,
