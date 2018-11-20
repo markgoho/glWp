@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: 'AIzaSyALaVAVfaq86U1DV88mlI9zKPlBBCl7k1U',
-    authDomain: 'deployment-mg.firebaseapp.com',
-    databaseURL: 'https://deployment-mg.firebaseio.com',
-    projectId: 'deployment-mg',
-    storageBucket: 'deployment-mg.appspot.com',
-    messagingSenderId: '127662918210',
+    apiKey: 'AIzaSyDbFOkgA1VLsHuza1kNxoP8g-GkvM7V-o8',
+    authDomain: 'gideonlabs-b4b71.firebaseapp.com',
+    databaseURL: 'https://gideonlabs-b4b71.firebaseio.com',
+    projectId: 'gideonlabs-b4b71',
+    storageBucket: 'gideonlabs-b4b71.appspot.com',
+    messagingSenderId: '90162579237',
   },
 };

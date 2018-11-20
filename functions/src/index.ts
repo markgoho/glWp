@@ -23,7 +23,7 @@ const db = admin.firestore();
 //   if (cache.get('posts')) {
 //     posts = cache.get('posts');
 //   } else {
-//     posts = await rp('https://admin.gideonlabs.ml/wp-json/wp/v2/posts', { json: true });
+//     posts = await rp('https://admin.gideonlabs.com/wp-json/wp/v2/posts', { json: true });
 //     cache.put('posts', posts, cacheTimeout);
 //   }
 //   res.set('Cache-Control', 'public, max-age=600, s-maxage=1200');
@@ -37,7 +37,7 @@ const db = admin.firestore();
 //     recentPosts = cache.get('recentPosts');
 //   } else {
 //     recentPosts = await rp(
-//       'https://admin.gideonlabs.ml/wp-json/wp/v2/posts?per_page=8&_embed=true',
+//       'https://admin.gideonlabs.com/wp-json/wp/v2/posts?per_page=8&_embed=true',
 //       { json: true }
 //     );
 //     cache.put('recentPosts', recentPosts, cacheTimeout);
@@ -51,7 +51,7 @@ const db = admin.firestore();
 
 //   const options = {
 //     method: 'GET',
-//     uri: 'https://admin.gideonlabs.ml/wp-json/wp/v2/categories',
+//     uri: 'https://admin.gideonlabs.com/wp-json/wp/v2/categories',
 //     resolveWithFullResponse: true,
 //     json: true,
 //   };
@@ -62,7 +62,7 @@ const db = admin.firestore();
 //     const categories = await rp(options);
 //     const totalNumber = categories.headers['x-wp-total'];
 //     allCategories = await rp(
-//       `https://admin.gideonlabs.ml/wp-json/wp/v2/categories?per_page=${totalNumber}`,
+//       `https://admin.gideonlabs.com/wp-json/wp/v2/categories?per_page=${totalNumber}`,
 //       { json: true }
 //     );
 //     cache.put('categories', allCategories, cacheTimeout);
@@ -78,7 +78,7 @@ export const updateCategories = functions.https.onRequest(async (req, res) => {
 
   const options = {
     method: 'GET',
-    uri: 'https://admin.gideonlabs.ml/wp-json/wp/v2/categories',
+    uri: 'https://admin.gideonlabs.com/wp-json/wp/v2/categories',
     resolveWithFullResponse: true,
     json: true,
   };
@@ -86,7 +86,7 @@ export const updateCategories = functions.https.onRequest(async (req, res) => {
   const categories = await rp(options);
   const totalNumber = categories.headers['x-wp-total'];
   allCategories = await rp(
-    `https://admin.gideonlabs.ml/wp-json/wp/v2/categories?per_page=${totalNumber}`,
+    `https://admin.gideonlabs.com/wp-json/wp/v2/categories?per_page=${totalNumber}`,
     { json: true }
   );
 
@@ -118,7 +118,7 @@ export const updatePosts = functions.https.onRequest(async (req, res) => {
 
   const options = {
     method: 'GET',
-    uri: 'https://admin.gideonlabs.ml/wp-json/wp/v2/posts',
+    uri: 'https://admin.gideonlabs.com/wp-json/wp/v2/posts',
     resolveWithFullResponse: true,
     json: true,
   };
@@ -129,7 +129,7 @@ export const updatePosts = functions.https.onRequest(async (req, res) => {
 
   for (let i = 0; i < totalPages; ++i) {
     postRequests.push(
-      rp(`https://admin.gideonlabs.ml/wp-json/wp/v2/posts?page=${i + 1}&_embed`, { json: true })
+      rp(`https://admin.gideonlabs.com/wp-json/wp/v2/posts?page=${i + 1}&_embed`, { json: true })
     );
   }
 

@@ -1,5 +1,17 @@
 {
   "projects": {
-    "default": "deployment-mg"
+    "default": "gideonlabs-b4b71"
+  },
+  "targets": {
+    "gideonlabs-b4b71": {
+      "hosting": {
+        "staging": [
+          "staging-gideonlabs"
+        ],
+        "production": [
+          "gideonlabs-b4b71"
+        ]
+      }
+    }
   }
 }
