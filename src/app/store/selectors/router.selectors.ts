@@ -1,9 +1,21 @@
-import * as fromRouter from '../reducers/router.reducer';
-import { getRouterState } from '../reducers';
-import { createSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { RouterReducerState } from '@ngrx/router-store';
+import { AppState } from '../reducers';
+import { RouterStateUrl } from '../reducers/router.reducer';
 
-export const getRouterReducerState = createSelector(getRouterState, (router: any) => router.state);
+const getRouterState = createFeatureSelector<AppState, RouterReducerState<RouterStateUrl>>(
+  'router'
+);
 
-export const getQueryParams = createSelector(getRouterReducerState, fromRouter.getQueryParams);
-export const getParams = createSelector(getRouterReducerState, fromRouter.getParams);
-export const getUrl = createSelector(getRouterReducerState, fromRouter.getUrl);
+export const getQueryParams = createSelector(
+  getRouterState,
+  router => router.state.queryParams
+);
+export const getParams = createSelector(
+  getRouterState,
+  router => router.state.params
+);
+export const getUrl = createSelector(
+  getRouterState,
+  router => router.state.url
+);

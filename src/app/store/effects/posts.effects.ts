@@ -1,63 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
-import {
-  PostsActionTypes,
-  LoadPost,
-  LoadPostSuccess,
-  LoadPostFailure,
-  LoadPostsSuccess,
-} from '../actions/posts.actions';
+import { PostsActionTypes, AddAllPosts } from '../actions/posts.actions';
+import { PostsService } from '../../posts.service';
+import { Post } from '../../post/models/post.interface';
 
 @Injectable()
 export class PostsEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(private actions$: Actions, private postsService: PostsService) {}
   @Effect()
-  loadSinglePost$: Observable<Action> = this.actions$.pipe(
-    ofType(PostsActionTypes.LoadPost),
-    map((action: LoadPost) => action.payload),
-    switchMap((slug: string) => {
-      // Build HTTP Params
-      let params = new HttpParams().set('slug', slug);
-      params = params.append('_embed', 'true');
-
-      return this.http.get(`https://admin.gideonlabs.ml/wp-json/wp/v2/posts`, { params }).pipe(
-        map((response: any) => {
-          const [post] = response;
-          return new LoadPostSuccess(post);
-        }),
-        catchError(() => of(new LoadPostFailure()))
-      );
-    })
+  queryPosts$: Observable<Action> = this.actions$.pipe(
+    ofType(PostsActionTypes.QueryPosts),
+    switchMap(() => this.postsService.queryPosts()),
+    map((posts: Post[]) => new AddAllPosts(posts)),
+    catchError(() => of(null))
   );
-
-  @Effect()
-  loadRecentPosts$: Observable<Action> = this.actions$.pipe(
-    ofType(PostsActionTypes.LoadRecentPosts),
-    switchMap(() => {
-      return this.http.get(`https://deployment-mg.firebaseapp.com/api/recent-posts`).pipe(
-        map((response: any) => {
-          return new LoadPostsSuccess(response);
-        }),
-        catchError(() => of(new LoadPostFailure()))
-      );
-    })
-  );
-
-  // @Effect({ dispatch: false })
-  // loadRecentPostsSuccess$ = this.actions$.pipe(
-  //   ofType(PostsActionTypes.LoadRecentPostsSuccess),
-  //   switchMap(() => {
-  //     return (
-  //       this.http
-  //         .get(`https://deployment-mg.firebaseapp.com/api/posts`)
-  //         // tslint:disable-next-line:no-console
-  //         .pipe(tap((response: any) => console.log(response)))
-  //     );
-  //   })
-  // );
 }

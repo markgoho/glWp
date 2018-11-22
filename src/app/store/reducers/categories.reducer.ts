@@ -1,51 +1,27 @@
 import { CategoriesActionTypes, CategoriesActions } from '../actions/categories.actions';
 import { Category } from '../../category/models/category.interface';
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 
-export interface CategoriesState {
-  entities: { [slug: string]: Category };
-  loading: boolean;
-  query: string;
+export function selectCategoryId(c: Category): string {
+  return c.slug;
 }
 
-export const initialState: CategoriesState = {
-  entities: {},
-  loading: false,
-  query: '',
-};
+export const categoryAdapter = createEntityAdapter<Category>({ selectId: selectCategoryId });
 
-export function reducer(state = initialState, action: CategoriesActions): CategoriesState {
+export interface CategoriesState extends EntityState<Category> {}
+
+export const initialState: CategoriesState = categoryAdapter.getInitialState();
+
+export function categoriesReducer(
+  state: CategoriesState = initialState,
+  action: CategoriesActions
+): CategoriesState {
   switch (action.type) {
-    case CategoriesActionTypes.LoadCategories: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
-
-    case CategoriesActionTypes.LoadCategoriesSuccess: {
-      const categories: Category[] = action.payload;
-
-      const entities = categories.reduce(
-        (newEntities: { [slug: string]: Category }, category: Category): any => {
-          return {
-            ...newEntities,
-            [category.slug]: category,
-          };
-        },
-        {}
-      );
-
-      return {
-        ...state,
-        loading: false,
-        entities,
-      };
+    case CategoriesActionTypes.AddAllCategories: {
+      return categoryAdapter.addAll(action.payload, state);
     }
 
     default:
       return state;
   }
 }
-
-export const getCategoriesEntities = (state: CategoriesState) => state.entities;
-export const getCategoriesLoading = (state: CategoriesState) => state.loading;

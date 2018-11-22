@@ -2,7 +2,7 @@
   "name": "Gideon Analytical Labs",
   "short_name": "Gideon Labs",
   "theme_color": "#341f1e",
-  "background_color": "##341f1e",
+  "background_color": "#341f1e",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

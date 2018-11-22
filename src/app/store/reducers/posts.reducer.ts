@@ -1,73 +1,24 @@
 import { PostsActionTypes, PostsActions } from '../actions/posts.actions';
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Post } from '../../post/models/post.interface';
 
-export interface PostsState {
-  entities: { [slug: string]: Post };
-  loading: boolean;
-  query: string;
+export function selectPostId(c: Post): string {
+  return c.slug;
 }
 
-export const initialState: PostsState = {
-  entities: {},
-  loading: false,
-  query: '',
-};
+export const postAdapter = createEntityAdapter<Post>({ selectId: selectPostId });
 
-export function reducer(state = initialState, action: PostsActions): PostsState {
+export interface PostsState extends EntityState<Post> {}
+
+export const initialState: PostsState = postAdapter.getInitialState();
+
+export function postsReducer(state: PostsState = initialState, action: PostsActions): PostsState {
   switch (action.type) {
-    // case PostsActionTypes.LoadRecentPosts:
-    // case PostsActionTypes.LoadPost: {
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-    // }
-
-    case PostsActionTypes.LoadPostsSuccess: {
-      const posts: Post[] = action.payload;
-
-      const entities = posts.reduce((newEntities: { [slug: string]: Post }, post: Post): any => {
-        return {
-          ...newEntities,
-          [post.slug]: post,
-        };
-      }, {});
-
-      return {
-        ...state,
-        loading: false,
-        entities,
-      };
+    case PostsActionTypes.AddAllPosts: {
+      return postAdapter.addAll(action.payload, state);
     }
-
-    // case PostsActionTypes.LoadPostSuccess: {
-    //   const post = action.payload;
-
-    //   const entities = {
-    //     ...state.entities,
-    //     [post.slug]: post,
-    //   };
-
-    //   return {
-    //     ...state,
-    //     entities,
-    //     loading: false,
-    //   };
-    // }
-
-    // case PostsActionTypes.HelpAssetSearchQuery: {
-    //   const query = action.payload;
-
-    //   return {
-    //     ...state,
-    //     query,
-    //   };
-    // }
 
     default:
       return state;
   }
 }
-
-export const getPostEntities = (state: PostsState) => state.entities;
-export const getPostLoading = (state: PostsState) => state.loading;

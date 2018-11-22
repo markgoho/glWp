@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentChangeAction } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
-import { Category } from './category/models/category.interface';
-import { CategoriesState } from './store/reducers/categories.reducer';
 import { Store } from '@ngrx/store';
-import { LoadCategoriesSuccess } from './store/actions/categories.actions';
-import { tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+
+import { CategoriesState } from './store/reducers/categories.reducer';
+import { Category } from './category/models/category.interface';
+import { QueryCategories } from './store/actions/categories.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,23 @@ import { tap } from 'rxjs/operators';
 export class CategoryService {
   categories$: Observable<Category[]>;
 
-  constructor(private db: AngularFirestore, private store: Store<CategoriesState>) {
-    this.categories$ = this.db
+  constructor(private afs: AngularFirestore, private store: Store<CategoriesState>) {}
+
+  loadAllCategories(): void {
+    this.store.dispatch(new QueryCategories());
+  }
+
+  queryCategories(): Observable<Category[]> {
+    return this.afs
       .collection<Category>('categories')
-      .valueChanges()
+      .snapshotChanges()
       .pipe(
-        tap((categories: Category[]) => this.store.dispatch(new LoadCategoriesSuccess(categories)))
+        map((arr: DocumentChangeAction<Category>[]) => {
+          return arr.map(doc => {
+            const data = doc.payload.doc.data();
+            return { id: doc.payload.doc.id, ...data };
+          });
+        })
       );
   }
 }

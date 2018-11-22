@@ -2,22 +2,17 @@ import { Action } from '@ngrx/store';
 import { Category } from '../../category/models/category.interface';
 
 export enum CategoriesActionTypes {
-  LoadCategories = '[Categories] Load Categories',
-  LoadCategoriesSuccess = '[Categories] Load Categories Success',
-  LoadCategoriesFailure = '[Categories] Load Categories Failure',
+  QueryCategories = '[Categories] Query',
+  AddAllCategories = '[Categories] Add All',
 }
 
-export class LoadCategories implements Action {
-  readonly type = CategoriesActionTypes.LoadCategories;
+export class QueryCategories implements Action {
+  readonly type = CategoriesActionTypes.QueryCategories;
 }
 
-export class LoadCategoriesSuccess implements Action {
-  readonly type = CategoriesActionTypes.LoadCategoriesSuccess;
+export class AddAllCategories implements Action {
+  readonly type = CategoriesActionTypes.AddAllCategories;
   constructor(public payload: Category[]) {}
 }
 
-export class LoadCategoriesFailure implements Action {
-  readonly type = CategoriesActionTypes.LoadCategoriesFailure;
-}
-
-export type CategoriesActions = LoadCategories | LoadCategoriesSuccess | LoadCategoriesFailure;
+export type CategoriesActions = QueryCategories | AddAllCategories;

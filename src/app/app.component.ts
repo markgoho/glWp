@@ -54,8 +54,8 @@ import { CategoryService } from './category.service';
 export class AppComponent implements OnInit {
   constructor(
     private router: Router,
-    private posts: PostsService,
-    private categories: CategoryService
+    private postsService: PostsService,
+    private categoryService: CategoryService
   ) {
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.posts.posts$.subscribe();
-    this.categories.categories$.subscribe();
+    this.categoryService.loadAllCategories();
+    this.postsService.loadAllPosts();
   }
 }

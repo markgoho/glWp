@@ -1,12 +1,11 @@
-import { createSelector } from '@ngrx/store';
-import { getCategoriesState } from '../reducers';
-import * as fromCategories from '../reducers/categories.reducer';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { CategoriesState, categoryAdapter } from '../reducers/categories.reducer';
 
-export const getCategoriesEntities = createSelector(
-  getCategoriesState,
-  fromCategories.getCategoriesEntities
+const getCategoriesState = createFeatureSelector<CategoriesState>('categories');
+
+const { selectAll } = categoryAdapter.getSelectors(getCategoriesState);
+
+export const getAllCategories = createSelector(
+  selectAll,
+  categories => categories
 );
-
-export const getCategoriesArray = createSelector(getCategoriesEntities, entities => {
-  return Object.keys(entities).map(slug => entities[slug]);
-});

@@ -1,10 +1,9 @@
 <div class="grid-container above-fold">
-  <ng-container *ngIf="post$ | async as post">
+  <ng-container *ngIf="(postsService.postBySlug$ | async) as post">
     <div class="container">
-      <h1>{{post.title}}</h1>
+      <h1>{{ post.title }}</h1>
 
-      <div class="post-container"
-           [innerHtml]="post.content"></div>
+      <div class="post-container" [innerHtml]="post.content"></div>
     </div>
   </ng-container>
 </div>
