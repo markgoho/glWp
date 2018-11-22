@@ -1,9 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { Post } from '../../../post/models/post.interface';
-import { Store, select } from '@ngrx/store';
-import { PostsState } from '../../../store/reducers/posts.reducer';
-import { getRecentPosts } from '../../../store/selectors/posts.selectors';
+import { PostsService } from '../../../posts.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-recent-posts',
@@ -18,11 +15,7 @@ export class RecentPostsComponent implements OnInit {
   inView$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   observer: IntersectionObserver;
 
-  recentPosts$: Observable<Post[]>;
-
-  constructor(private store: Store<PostsState>, private element: ElementRef) {
-    this.recentPosts$ = this.store.pipe(select(getRecentPosts));
-  }
+  constructor(public postsService: PostsService, private element: ElementRef) {}
 
   ngOnInit() {
     this.observer = new IntersectionObserver(entries => {

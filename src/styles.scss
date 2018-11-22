@@ -4,6 +4,8 @@
   --rgba-primary-1: rgba(134, 105, 103, 1);
   --rgba-primary-2: rgba(96, 75, 74, 1);
   --rgba-primary-3: #341f1e;
+  --color-primary: hsl(347, 75%, 33%);
+  --color-primary-dark: hsl(347, 75%, 23%);
   --rgba-primary-4: rgba(47, 23, 21, 1);
   --rgba-light-0: rgba(195, 184, 186, 1); // Main Primary color */
   --rgba-light-1: rgba(231, 197, 204, 1);
@@ -20,24 +22,28 @@
 
 @font-face {
   font-display: swap;
-  font-family: 'FuturaBT-Book';
+  font-family: 'FuturaBT';
+  font-weight: 400;
   src: url('/assets/fonts/FuturaBT-Book.woff2') format('woff2');
 }
 @font-face {
   font-display: swap;
-  font-family: 'FuturaBT-Heavy';
+  font-family: 'FuturaBT';
+  font-weight: 500;
   src: url('/assets/fonts/FuturaBT-Heavy.woff2') format('woff2');
 }
 @font-face {
   font-display: swap;
-  font-family: 'FuturaBT-Light';
+  font-family: 'FuturaBT';
+  font-weight: 300;
   src: url('/assets/fonts/FuturaBT-Light.woff2') format('woff2');
 }
 
 body {
   margin: 0;
   background-color: #f9f8f6;
-  font-family: 'FuturaBT-Book', sans-serif;
+  font-family: FuturaBT, sans-serif;
+  font-weight: 400;
 }
 
 html,

@@ -14,13 +14,13 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  height: 30rem;
-  border-radius: 3px;
+  border-radius: 6px;
   box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 
   .img-container {
     position: relative;
-    height: 50%;
+    height: 200px;
+    border-bottom: 12px solid var(--color-primary);
   }
 
   img {
@@ -33,49 +33,56 @@
     }
   }
 
-  .post-text {
-    padding: 1rem;
+  .post-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
   }
 
-  .post-title {
-    margin: 0.5rem 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgb(100, 100, 100);
+  .separator {
+    margin-top: 20px;
+    width: 25%;
+    border-top: 3px solid var(--rgba-light-0);
+  }
+
+  .post-text {
+    position: relative;
+    padding: 24px;
+    padding-bottom: 10px;
+    height: 300px;
+    overflow-y: hidden;
+    background-color: #fff;
+  }
+
+  .excerpt {
+    margin-top: 20px;
+    line-height: 1.35;
+    font-size: 18px;
+  }
+
+  .post-text::after {
+    content: '';
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 100%);
   }
 
   .read-more {
-    position: absolute;
     display: flex;
-    justify-content: center;
     align-items: center;
-    bottom: 0;
-    right: 20px;
-    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
-    transform: translateY(50%);
-    background-color: var(--call-to-action);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    text-transform: uppercase;
     color: white;
     text-decoration: none;
-    transition: all 0.1s ease;
     cursor: pointer;
-
-    &:hover {
-      background-color: var(--call-to-action-hover);
-    }
-  }
-
-  .svg-container {
-    background-color: var(--rgba-primary-4);
-    height: 100%;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .svg-container svg {
-    width: 50%;
+    height: 100px;
+    font-family: FuturaBT, sans-serif;
+    font-weight: 500;
+    padding: 24px;
+    background-color: var(--color-primary);
+    background: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
   }
 }

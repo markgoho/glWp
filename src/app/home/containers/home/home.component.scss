@@ -23,9 +23,9 @@
   }
 
   h1 {
-    font-family: 'FuturaBT-Heavy', sans-serif;
+    font-family: FuturaBT, sans-serif;
     font-size: 5.625rem;
-    font-weight: 100;
+    font-weight: 500;
     letter-spacing: -5px;
     max-width: 40vw;
     line-height: 1.111;
@@ -153,14 +153,15 @@
   app-recent-posts {
     grid-column: 2/8;
   }
+
+  background: url('/assets/images/natural_paper.png') repeat repeat;
 }
 
 .section-header {
   max-width: 100%;
   grid-column: 2/8;
-  font-family: 'FuturaBT-Heavy', sans-serif;
   font-size: 3rem;
-  font-weight: 100;
+  font-weight: 500;
   letter-spacing: -1px;
   max-width: 40vw;
   line-height: 1.111;

@@ -13,7 +13,7 @@
 }
 
 .gideon {
-  font-family: 'FuturaBT-Heavy';
+  font-weight: 500;
   font-size: 4rem;
   line-height: 0.7;
   letter-spacing: -4px;
@@ -23,8 +23,7 @@
 .labs {
   font-size: 0.4rem;
   letter-spacing: 3px;
-  font-family: 'FuturaBT-Book';
-  font-weight: bold;
+  font-weight: 400;
   text-transform: uppercase;
   grid-area: 1 / 1 / -1 / -1;
   justify-self: end;
