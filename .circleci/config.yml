@@ -45,7 +45,7 @@ jobs:
           key: glwp-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Deploy
-          command: npm run deploy
+          command: npm run deploy:staging
 
 workflows:
   version: 2
