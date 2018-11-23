@@ -1,5 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { PostsService } from '../../../posts.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store';
+import { Back } from '../../../store/actions/router.actions';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,5 +11,9 @@ import { PostsService } from '../../../posts.service';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent {
-  constructor(public postsService: PostsService) {}
+  constructor(public postsService: PostsService, private store: Store<AppState>) {}
+
+  navigateBack(): void {
+    this.store.dispatch(new Back());
+  }
 }

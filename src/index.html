@@ -22,5 +22,24 @@
     <noscript>
       <h1>Sorry you're not using JavaScript. Please enable this feature to see this site.</h1>
     </noscript>
+
+    <!--
+      <script>
+        window.performance && performance.mark && performance.mark('index.html');
+
+        function measureDuration(mark, opt_reference = 'responseEnd') {
+          const name = `${opt_reference}:${mark}`;
+          performance.clearMeasures(name);
+          performance.measure(name, opt_reference, mark);
+          const [measure] = performance.getEntriesByName(name);
+
+          return measure;
+        }
+
+        const indexRenderTime = measureDuration('index.html');
+
+        console.log('Index render time', indexRenderTime);
+      </script>
+    -->
   </body>
 </html>

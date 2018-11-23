@@ -1,9 +1,14 @@
-<div class="grid-container above-fold">
-  <ng-container *ngIf="(postsService.postBySlug$ | async) as post">
-    <div class="container">
-      <h1>{{ post.title }}</h1>
+<ng-container *ngIf="(postsService.postBySlug$ | async) as post">
+  <div (click)="navigateBack()" class="navigate-back">
+    <div class="arrow"></div>
+    Back
+  </div>
 
-      <div class="post-container" [innerHtml]="post.content"></div>
-    </div>
-  </ng-container>
-</div>
+  <h1 class="post-title">{{ post.title }}</h1>
+  <div class="separator"></div>
+  <app-post-content [content]="post.content"></app-post-content>
+
+  <a class="all-stories" routerLink="/posts">
+    <button class="call-to-action secondary" type="button">All Stories</button>
+  </a>
+</ng-container>
