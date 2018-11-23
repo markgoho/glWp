@@ -9,7 +9,17 @@
 }
 
 .logo {
+  grid-column: 2/4;
+
   display: inline-grid;
+  grid-template-columns: repeat(6, min-content);
+
+  text-decoration: none;
+  color: black;
+  line-height: 0.8;
+  @media screen and (max-width: 30rem) {
+    width: 5rem;
+  }
 }
 
 .gideon {
@@ -21,25 +31,12 @@
 }
 
 .labs {
-  font-size: 0.4rem;
-  letter-spacing: 3px;
-  font-weight: 400;
+  font-size: 9.5px;
+  letter-spacing: 1px;
+  font-weight: 500;
   text-transform: uppercase;
   grid-area: 1 / 1 / -1 / -1;
   justify-self: end;
-}
-
-.logo-link {
-  text-decoration: none;
-  color: black;
-  grid-column: 2/4;
-}
-
-.div-logo {
-  grid-template-columns: repeat(6, min-content);
-  @media screen and (max-width: 30rem) {
-    width: 5rem;
-  }
 }
 
 .search-bar {

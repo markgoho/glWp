@@ -154,6 +154,7 @@ app-recent-posts {
 }
 
 .section-header h2 {
+  color: #fff;
   font-size: 48px;
   font-weight: 500;
   letter-spacing: -1px;
@@ -161,9 +162,8 @@ app-recent-posts {
 }
 
 .separator {
-  width: 50px;
   border-top: 3px solid var(--color-primary);
-  margin: 16px auto 0 auto;
+  margin: 32px auto;
 }
 
 .stories h2 {

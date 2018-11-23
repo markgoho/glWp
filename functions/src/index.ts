@@ -222,8 +222,8 @@ export const sendContactMessage = functions.firestore
         <p>${message}</p>
 
         <div>
-        Email: ${email} <br/>
-        Phone: ${phone}
+          Email: ${email} <br/>
+          Phone: ${phone}
         </div>
       `,
     };
