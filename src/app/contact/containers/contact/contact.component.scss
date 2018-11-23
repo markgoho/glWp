@@ -68,7 +68,13 @@ textarea {
   margin-bottom: 16px;
 }
 
-button {
+button,
+.message-sent {
   margin-top: 32px;
   grid-column: 2 / 3;
+}
+
+.message-sent {
+  text-align: center;
+  font-size: 24px;
 }

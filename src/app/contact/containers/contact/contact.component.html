@@ -31,4 +31,16 @@
   </div>
 </div>
 
-<button class="call-to-action secondary" type="button" (click)="submitForm()">Send</button>
+<button
+  class="call-to-action secondary"
+  type="button"
+  (click)="submitForm()"
+  *ngIf="!messageSuccess; else: messageSent"
+>
+  Send
+</button>
+<ng-template #messageSent>
+  <div class="message-sent">
+    Your message has been sent. Please allow some time to review the request.
+  </div>
+</ng-template>

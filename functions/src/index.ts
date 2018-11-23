@@ -202,7 +202,7 @@ export const updatePosts = functions.https.onRequest(async (req, res) => {
 
 export const sendContactMessage = functions.firestore
   .document('messages/{messageId}')
-  .onCreate(async (snapshot, context) => {
+  .onCreate(async snapshot => {
     const domain = 'mg.gideonlabs.com';
     const apiKey = functions.config().mailgun.key;
 
@@ -211,17 +211,20 @@ export const sendContactMessage = functions.firestore
       domain,
     });
 
-    const { name, message, email } = snapshot.data();
+    const { name, message, email, phone } = snapshot.data();
 
     const data: mailgun.messages.SendData = {
-      to: 'markgoho@gmail.com',
+      to: 'jag@gideonlabs.com',
       from: 'noreply@mg.gideonlabs.com',
       subject: 'Website Contact Message',
       html: `
         <h1>Message from ${name}</h1>
         <p>${message}</p>
 
-        Reply To: ${email}
+        <div>
+        Email: ${email} <br/>
+        Phone: ${phone}
+        </div>
       `,
     };
 

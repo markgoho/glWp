@@ -167,23 +167,26 @@ exports.updatePosts = functions.https.onRequest((req, res) => __awaiter(this, vo
 }));
 exports.sendContactMessage = functions.firestore
     .document('messages/{messageId}')
-    .onCreate((snapshot, context) => __awaiter(this, void 0, void 0, function* () {
+    .onCreate((snapshot) => __awaiter(this, void 0, void 0, function* () {
     const domain = 'mg.gideonlabs.com';
     const apiKey = functions.config().mailgun.key;
     const mg = new mailgun({
         apiKey,
         domain,
     });
-    const { name, message, email } = snapshot.data();
+    const { name, message, email, phone } = snapshot.data();
     const data = {
-        to: 'markgoho@gmail.com',
+        to: 'jag@gideonlabs.com',
         from: 'noreply@mg.gideonlabs.com',
         subject: 'Website Contact Message',
         html: `
         <h1>Message from ${name}</h1>
         <p>${message}</p>
 
-        Reply To: ${email}
+        <div>
+        Email: ${email} <br/>
+        Phone: ${phone}
+        </div>
       `,
     };
     return mg.messages().send(data);
