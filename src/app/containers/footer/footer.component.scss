@@ -1,25 +1,71 @@
+:host {
+  display: block;
+  background-color: var(--footer-color);
+
+  --side-margin: 16px;
+}
+
 .footer {
-  padding-top: 2rem;
-  background-color: var(--rgba-primary-4);
-  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr repeat(4, minmax(auto, 360px)) 1fr;
+  grid-template-rows: max-content max-content 76px;
+  grid-column-gap: 16px;
+  grid-template-areas:
+    '. gal-logo about learn-more equipment .'
+    '. action location contact . .'
+    'copyright copyright copyright copyright copyright copyright';
+
+  grid-column: 2 / 3;
+
   color: rgb(255, 255, 255);
 }
 
+.footer > *:not(.copyright) {
+  padding: 48px 0;
+}
+
+.about-us {
+  grid-area: about;
+}
+
+.action {
+  grid-area: action;
+}
+
+.location {
+  grid-area: location;
+}
+
+.history {
+  grid-area: history;
+}
+
+.contact {
+  grid-area: contact;
+}
+
+.learn-more {
+  grid-area: learn-more;
+}
+
+.equipment {
+  grid-area: equipment;
+}
+
+.gal-logo {
+  max-width: 250px;
+  grid-area: gal-logo;
+}
+
 .section-header {
-  font-family: FuturaBT, sans-serif;
   font-weight: 500;
-  letter-spacing: 2px;
   text-transform: uppercase;
-  font-size: 0.8725rem;
-  margin-bottom: 1.5625rem;
+  font-size: 20px;
 }
 
 .section-list {
-  font-size: 1.125rem;
+  font-size: 20px;
   color: #fff;
-  li {
-    margin-bottom: 0.75rem;
-  }
 }
 
 .section-list a {
@@ -31,27 +77,20 @@
   }
 }
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-template-rows: repeat(3, 1fr);
-}
-
 .nap-info {
   color: white;
 }
 
-.container > div {
-  @media screen and (max-width: 40rem) {
-    width: calc(100vw - 2rem);
-  }
-}
-
-.disclaimer {
-  grid-column: 1 / -1;
+.copyright {
+  grid-area: copyright;
   font-size: 0.8rem;
-  line-height: 1.75;
-  opacity: 0.3;
   color: #fff;
-  padding: 0.75rem 0;
+  text-align: center;
+  background-color: var(--footer-color-dark);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 76px;
 }

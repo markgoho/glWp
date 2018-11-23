@@ -13,11 +13,14 @@
   --rgba-light-3: rgba(162, 136, 142, 1);
   --rgba-light-4: rgba(148, 115, 123, 1);
 
-  --nav-link: rgba(18, 18, 18, 0.5);
-  --call-to-action: rgb(84, 148, 49);
+  --nav-link: #767676;
+  --call-to-action: hsl(99, 50%, 34%);
   --call-to-action-hover: rgb(50, 111, 18);
 
   --dark-header: rgb(84, 87, 90);
+
+  --footer-color: hsl(206, 4%, 34%);
+  --footer-color-dark: hsl(220, 2%, 25%);
 }
 
 @font-face {
@@ -84,4 +87,38 @@ ol {
 
 .above-fold {
   min-height: calc(100vh - 7rem);
+}
+
+.call-to-action {
+  box-shadow: none;
+  border: none;
+  background-color: var(--call-to-action);
+  font-weight: 400;
+  font-size: 1.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 7px;
+  color: white;
+  text-decoration: none;
+  transition: all 0.1s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--call-to-action-hover);
+  }
+
+  @media screen and (max-width: 40rem) {
+    display: none;
+  }
+
+  @media screen and (max-width: 30rem) {
+    display: block;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+}
+
+.call-to-action.secondary {
+  background-color: var(--color-primary);
+  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 }
