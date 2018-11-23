@@ -1,11 +1,13 @@
 .paragraph-text {
-  margin: 0 96px;
+  margin: 0 0 24px 96px;
   width: 70ch;
   font-size: 24px;
 }
 
 .image-title {
-  margin: 96px 0 16px 96px;
+  margin: 96px 0 0 96px;
+  font-weight: 500;
+  font-size: 32px;
 }
 
 .gallery {
@@ -37,4 +39,11 @@
     padding: 16px;
     margin: 0;
   }
+}
+
+.separator {
+  border-top: 3px solid var(--color-primary);
+  grid-column: 2 / 8;
+  margin: 32px 96px;
+  width: 96px;
 }

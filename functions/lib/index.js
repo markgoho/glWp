@@ -14,6 +14,7 @@ const functions = require("firebase-functions");
 const rp = require("request-promise-native");
 // import * as cache from 'memory-cache';
 const admin = require("firebase-admin");
+const mailgun = require("mailgun-js");
 admin.initializeApp();
 const db = admin.firestore();
 // const app: express.Application = express();
@@ -163,4 +164,27 @@ exports.updatePosts = functions.https.onRequest((req, res) => __awaiter(this, vo
         }
     }
     return res.status(200).send('Posts added to DB');
+}));
+exports.sendContactMessage = functions.firestore
+    .document('messages/{messageId}')
+    .onCreate((snapshot, context) => __awaiter(this, void 0, void 0, function* () {
+    const domain = 'mg.gideonlabs.com';
+    const apiKey = functions.config().mailgun.key;
+    const mg = new mailgun({
+        apiKey,
+        domain,
+    });
+    const { name, message, email } = snapshot.data();
+    const data = {
+        to: 'markgoho@gmail.com',
+        from: 'noreply@mg.gideonlabs.com',
+        subject: 'Website Contact Message',
+        html: `
+        <h1>Message from ${name}</h1>
+        <p>${message}</p>
+
+        Reply To: ${email}
+      `,
+    };
+    return mg.messages().send(data);
 }));

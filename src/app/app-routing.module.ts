@@ -9,6 +9,10 @@ const routes: Routes = [
     data: { depth: 0 },
   },
   {
+    path: 'contact',
+    loadChildren: './contact/contact.module#ContactModule',
+  },
+  {
     path: 'posts/category',
     loadChildren: './category/category.module#CategoryModule',
     data: { depth: 1 },

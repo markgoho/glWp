@@ -6,6 +6,7 @@ import * as rp from 'request-promise-native';
 import * as admin from 'firebase-admin';
 import { Category } from './models/category.interface';
 import { Post } from './models/post.interface';
+import * as mailgun from 'mailgun-js';
 
 admin.initializeApp();
 
@@ -198,3 +199,31 @@ export const updatePosts = functions.https.onRequest(async (req, res) => {
 
   return res.status(200).send('Posts added to DB');
 });
+
+export const sendContactMessage = functions.firestore
+  .document('messages/{messageId}')
+  .onCreate(async (snapshot, context) => {
+    const domain = 'mg.gideonlabs.com';
+    const apiKey = functions.config().mailgun.key;
+
+    const mg = new mailgun({
+      apiKey,
+      domain,
+    });
+
+    const { name, message, email } = snapshot.data();
+
+    const data: mailgun.messages.SendData = {
+      to: 'markgoho@gmail.com',
+      from: 'noreply@mg.gideonlabs.com',
+      subject: 'Website Contact Message',
+      html: `
+        <h1>Message from ${name}</h1>
+        <p>${message}</p>
+
+        Reply To: ${email}
+      `,
+    };
+
+    return mg.messages().send(data);
+  });

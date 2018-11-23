@@ -1,0 +1,74 @@
+:host {
+  display: grid;
+  grid-template-columns: 1fr 1280px 1fr;
+}
+
+h1,
+.separator,
+.container {
+  grid-column: 2 / 3;
+}
+
+.container {
+  display: flex;
+}
+
+form,
+.contact-cards {
+  flex: 1 1 50%;
+}
+
+h1 {
+  padding-top: 96px;
+}
+
+label {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 16px;
+
+  input,
+  textarea {
+    display: block;
+    width: 90%;
+  }
+}
+
+label:last-child {
+  margin-bottom: 0;
+}
+
+input,
+textarea {
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: none;
+  border: 1px solid rgb(200, 200, 200);
+}
+
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 6px;
+  flex: 1 1 50%;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 24px;
+  color: rgb(117, 117, 117);
+}
+
+.card:first-child {
+  margin-bottom: 16px;
+}
+
+button {
+  margin-top: 32px;
+  grid-column: 2 / 3;
+}
