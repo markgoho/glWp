@@ -1,4 +1,4 @@
-<main class="main-content" *ngIf="(postsService.postBySlug$ | async) as post">
+<div class="main-content" *ngIf="(postsService.postBySlug$ | async) as post">
   <div (click)="navigateBack()" class="navigate-back">
     <div class="arrow"></div>
     Back
@@ -9,4 +9,4 @@
   <app-post-content [content]="post.content"></app-post-content>
 
   <a class="all-stories button secondary" routerLink="/posts"> All Stories </a>
-</main>
+</div>

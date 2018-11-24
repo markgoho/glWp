@@ -64,7 +64,8 @@
   align-items: center;
 }
 
-.nav-link:not(.call-to-action) {
+.nav-link,
+.button.primary {
   display: none;
 }
 
@@ -113,11 +114,11 @@
 }
 
 @media screen and (min-width: 480px) {
-  .nav-link:not(.call-to-action) {
+  .nav-link {
     display: block;
   }
 
-  .call-to-action {
+  .button.primary {
     display: block;
   }
 }

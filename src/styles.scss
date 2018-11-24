@@ -57,24 +57,6 @@ body {
   text-rendering: optimizeSpeed;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr repeat(6, minmax(auto, 15rem)) 1fr;
-  grid-template-rows: auto;
-  align-items: center;
-  > .container {
-    grid-column: 2/8;
-  }
-
-  @media (max-width: 94rem) {
-    grid-template-columns: 3rem repeat(6, minmax(auto, 15em)) 3rem;
-  }
-
-  @media (max-width: 40rem) {
-    grid-template-columns: 1rem repeat(6, minmax(auto, 15em)) 1rem;
-  }
-}
-
 a {
   background-color: transparent; /* 1 */
   text-decoration: none;
@@ -93,11 +75,12 @@ ol {
 }
 
 .button {
+  display: inline-block;
   box-shadow: none;
   border: none;
   font-weight: 400;
-  font-size: 1.75rem;
-  padding: 0.75rem 1.5rem;
+  font-size: 16px;
+  padding: 12px 24px;
   border-radius: 7px;
   color: #fff;
   text-decoration: none;
@@ -144,4 +127,10 @@ h2 {
   width: 96px;
   margin-top: 32px;
   margin-bottom: 32px;
+}
+
+@media screen and (min-width: 769px) {
+  .button {
+    font-size: 24px;
+  }
 }

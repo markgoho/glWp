@@ -184,10 +184,11 @@ exports.sendContactMessage = functions.firestore
         <p>${message}</p>
 
         <div>
-        Email: ${email} <br/>
-        Phone: ${phone}
+          Email: ${email} <br/>
+          Phone: ${phone}
         </div>
       `,
     };
-    return mg.messages().send(data);
+    yield mg.messages().send(data);
+    return snapshot.ref.update({ sent: true });
 }));

@@ -228,5 +228,6 @@ export const sendContactMessage = functions.firestore
       `,
     };
 
-    return mg.messages().send(data);
+    await mg.messages().send(data);
+    return snapshot.ref.update({ sent: true });
   });
