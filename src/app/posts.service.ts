@@ -6,16 +6,18 @@ import { Store, select } from '@ngrx/store';
 import { Post } from './post/models/post.interface';
 import { QueryPosts } from './store/actions/posts.actions';
 import { map } from 'rxjs/operators';
-import { getRecentPosts, getPostBySlug } from './store/selectors/posts.selectors';
+import { getRecentPosts, getPostBySlug, getAllPosts } from './store/selectors/posts.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
+  allPosts$: Observable<Post[]>;
   recentPosts$: Observable<Post[]>;
   postBySlug$: Observable<Post>;
 
   constructor(private afs: AngularFirestore, private store: Store<PostsState>) {
+    this.allPosts$ = this.store.pipe(select(getAllPosts));
     this.recentPosts$ = this.store.pipe(select(getRecentPosts));
     this.postBySlug$ = this.store.pipe(select(getPostBySlug));
   }

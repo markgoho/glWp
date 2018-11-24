@@ -4,11 +4,11 @@ import { BehaviorSubject } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-recent-post',
-  templateUrl: './recent-post.component.html',
-  styleUrls: ['./recent-post.component.scss'],
+  selector: 'app-post-snippet',
+  templateUrl: './post-snippet.component.html',
+  styleUrls: ['./post-snippet.component.scss'],
 })
-export class RecentPostComponent implements OnInit {
+export class PostSnippetComponent implements OnInit {
   options = {
     rootMargin: '0px',
     threshold: 1,

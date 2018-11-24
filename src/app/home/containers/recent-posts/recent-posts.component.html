@@ -5,9 +5,9 @@
   </div>
 
   <div class="recent-posts">
-    <app-recent-post
+    <app-post-snippet
       *ngFor="let post of (postsService.recentPosts$ | async)"
       [post]="post"
-    ></app-recent-post>
+    ></app-post-snippet>
   </div>
 </section>
