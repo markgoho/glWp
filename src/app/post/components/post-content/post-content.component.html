@@ -3,5 +3,9 @@
 <div class="separator"></div>
 
 <div class="gallery">
-  <div class="image-container" *ngFor="let d of imageContainers" [innerHTML]="d.innerHTML"></div>
+  <figure
+    class="image-container"
+    *ngFor="let d of imageContainers"
+    [innerHTML]="d.innerHTML"
+  ></figure>
 </div>

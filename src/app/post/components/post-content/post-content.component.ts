@@ -9,12 +9,14 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 export class PostContentComponent {
   parser = new DOMParser();
   paragraphs: HTMLParagraphElement[];
-  imageContainers: HTMLDivElement[];
+  imageContainers: HTMLElement[];
 
   @Input('content')
   set content(c: string) {
     const doc = this.parser.parseFromString(c, 'text/html');
     this.paragraphs = Array.from(doc.body.querySelectorAll('p:not([class])'));
-    this.imageContainers = Array.from(doc.body.querySelectorAll('div.wp-caption'));
+    this.imageContainers = Array.from(doc.body.querySelectorAll('figure'));
+
+    // console.log(doc);
   }
 }
