@@ -1,18 +1,18 @@
-<div class="img-container">
-  <ng-container *ngIf="(inView$ | async)">
+<ng-container *ngIf="(inView$ | async)">
+  <div class="img-container">
     <img *ngIf="post.media.image; else: logo" [src]="post.media.image.source_url" />
-  </ng-container>
-</div>
+  </div>
 
-<!-- {{ post.media | json }} -->
+  <!-- {{ post.media | json }} -->
 
-<div class="post-text">
-  <h3 class="post-title">{{ post.title }}</h3>
-  <div class="separator"></div>
-  <div class="excerpt" [innerHTML]="post.excerpt"></div>
-</div>
+  <div class="post-text">
+    <h3 class="post-title">{{ post.title }}</h3>
+    <div class="separator"></div>
+    <div class="excerpt" [innerHTML]="post.excerpt"></div>
+  </div>
 
-<a [routerLink]="['/posts', post.slug]" class="read-more"> Read more </a>
+  <a [routerLink]="['/posts', post.slug]" class="read-more"> Read more </a>
+</ng-container>
 
 <ng-template #logo>
   <div class="svg-container">
