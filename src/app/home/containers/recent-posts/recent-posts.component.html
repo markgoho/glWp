@@ -1,0 +1,13 @@
+<section class="stories">
+  <div class="section-header">
+    <h2 class="section-title">Success Stories</h2>
+    <a routerLink="/posts">
+      <button class="call-to-action secondary" type="button">All Stories</button></a
+    >
+  </div>
+
+  <app-recent-post
+    *ngFor="let post of (postsService.recentPosts$ | async)"
+    [post]="post"
+  ></app-recent-post>
+</section>

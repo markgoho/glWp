@@ -1,13 +1,14 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { PostsService } from '../../../posts.service';
+import { Component, Input, ChangeDetectionStrategy, ElementRef, OnInit } from '@angular/core';
+import { Post } from '../../../post/models/post.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-recent-posts',
-  templateUrl: './recent-posts.component.html',
-  styleUrls: ['./recent-posts.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-recent-post',
+  templateUrl: './recent-post.component.html',
+  styleUrls: ['./recent-post.component.scss'],
 })
-export class RecentPostsComponent implements OnInit {
+export class RecentPostComponent implements OnInit {
   options = {
     rootMargin: '0px',
     threshold: 1,
@@ -15,7 +16,10 @@ export class RecentPostsComponent implements OnInit {
   inView$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   observer: IntersectionObserver;
 
-  constructor(public postsService: PostsService, private element: ElementRef) {}
+  @Input()
+  post: Post;
+
+  constructor(private element: ElementRef) {}
 
   ngOnInit() {
     this.observer = new IntersectionObserver(entries => {

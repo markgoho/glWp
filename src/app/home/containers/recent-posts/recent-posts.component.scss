@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  padding: 32px 16px;
+  background: url('/assets/images/natural_paper.jpg') repeat repeat;
+}
+
+.stories {
+  color: var(--dark-header);
+  min-height: 100vh;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 2 / 3;
+  align-self: end;
+  margin-bottom: 32px;
+}
+
+.section-title {
+  color: var(--color-primary);
+  margin-bottom: 0;
+  font-size: 24px;
+}
+
+@media screen and (min-width: 480px) {
+  .stories {
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, 1440px) 1fr;
+  }
+
+  .section-title {
+    font-size: 48px;
+  }
+}

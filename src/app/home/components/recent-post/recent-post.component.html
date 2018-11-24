@@ -1,21 +1,17 @@
-<ng-container *ngIf="(postsService.recentPosts$ | async) as posts">
-  <div class="post" *ngFor="let post of posts">
-    <div class="img-container">
-      <ng-container *ngIf="(inView$ | async)">
-        <img *ngIf="post.media.image; else: logo" [src]="post.media.image.source_url" />
-      </ng-container>
-    </div>
-    <!-- {{ post.media | json }} -->
+<div class="img-container">
+  <ng-container *ngIf="(inView$ | async)">
+    <img *ngIf="post.media.image; else: logo" [src]="post.media.image.source_url" />
+  </ng-container>
+</div>
+<!-- {{ post.media | json }} -->
 
-    <div class="post-text">
-      <h3 class="post-title">{{ post.title }}</h3>
-      <div class="separator"></div>
-      <div class="excerpt" [innerHTML]="post.excerpt"></div>
-    </div>
+<div class="post-text">
+  <h3 class="post-title">{{ post.title }}</h3>
+  <div class="separator"></div>
+  <div class="excerpt" [innerHTML]="post.excerpt"></div>
+</div>
 
-    <a [routerLink]="['/posts', post.slug]" class="read-more"> Read more </a>
-  </div>
-</ng-container>
+<a [routerLink]="['/posts', post.slug]" class="read-more"> Read more </a>
 
 <ng-template #logo>
   <div class="svg-container">

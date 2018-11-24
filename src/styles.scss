@@ -108,10 +108,6 @@ ol {
     background-color: var(--call-to-action-hover);
   }
 
-  @media screen and (max-width: 40rem) {
-    display: none;
-  }
-
   @media screen and (max-width: 30rem) {
     display: block;
     font-size: 1rem;

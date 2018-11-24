@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './containers/home/home.component';
-import { SharedModule } from '../shared/shared.module';
+import { StepsComponent } from './components/steps/steps.component';
+import { RecentPostsComponent } from './containers/recent-posts/recent-posts.component';
+import { RecentPostComponent } from './components/recent-post/recent-post.component';
 
 @NgModule({
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
-  declarations: [HomeComponent],
+  imports: [CommonModule, HomeRoutingModule],
+  declarations: [HomeComponent, StepsComponent, RecentPostsComponent, RecentPostComponent],
 })
 export class HomeModule {}
