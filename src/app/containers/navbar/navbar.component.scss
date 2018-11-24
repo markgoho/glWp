@@ -1,25 +1,31 @@
+:host {
+  display: block;
+  background-color: #fff;
+}
+
+.navbar {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 .navbar-brand svg {
   width: 12rem;
   max-width: 12rem;
 }
 
-.navbar {
-  background-color: rgb(255, 255, 255);
-  height: 7rem;
-}
-
 .logo {
   grid-column: 2/4;
-
+  width: 5rem;
   display: inline-grid;
   grid-template-columns: repeat(6, min-content);
 
   text-decoration: none;
   color: black;
   line-height: 0.8;
-  @media screen and (max-width: 30rem) {
-    width: 5rem;
-  }
 }
 
 .gideon {
@@ -40,12 +46,8 @@
 }
 
 .search-bar {
-  display: flex;
   align-items: center;
-
-  @media screen and (max-width: 40rem) {
-    display: none;
-  }
+  display: none;
 
   svg {
     fill: var(--nav-link);
@@ -60,14 +62,10 @@
 .links {
   display: flex;
   align-items: center;
-  grid-column: 4 / 8;
-  justify-self: end;
 }
 
 .nav-link:not(.call-to-action) {
-  @media screen and (max-width: 40rem) {
-    display: none;
-  }
+  display: none;
 }
 
 .nav-link {
@@ -87,18 +85,11 @@
   border-radius: 5px;
   padding: 0.5em 0.75rem;
   transition: all 0.1s ease;
+  display: none;
 
   &:hover {
     color: #fff;
     background-color: var(--call-to-action-hover);
-  }
-
-  @media screen and (max-width: 40rem) {
-    font-size: 1rem;
-  }
-
-  @media screen and (max-width: 30rem) {
-    display: none;
   }
 }
 
@@ -129,4 +120,20 @@
 }
 .griditem6 {
   grid-area: 1 / 7 / 2 / 8;
+}
+
+@media screen and (min-width: 480px) {
+  .nav-link:not(.call-to-action) {
+    display: block;
+  }
+
+  .call-to-action {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .navbar {
+    padding: 32px 16px;
+  }
 }

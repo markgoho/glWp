@@ -6,7 +6,7 @@
 }
 
 .section-title {
-  color: #fff;
+  color: var(--primary-3-light);
   font-size: 32px;
   font-weight: 500;
   letter-spacing: -1px;
@@ -33,6 +33,7 @@
 
 .step-description {
   margin: 16px auto 0 auto;
+  color: var(--primary-3-light);
   font-size: 24px;
   width: 60%;
 }
@@ -43,7 +44,7 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
   .steps {
     display: flex;
     flex-wrap: wrap;
