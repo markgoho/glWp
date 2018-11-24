@@ -1,4 +1,4 @@
-<ng-container *ngIf="(postsService.postBySlug$ | async) as post">
+<main class="main-content" *ngIf="(postsService.postBySlug$ | async) as post">
   <div (click)="navigateBack()" class="navigate-back">
     <div class="arrow"></div>
     Back
@@ -8,7 +8,5 @@
   <div class="separator"></div>
   <app-post-content [content]="post.content"></app-post-content>
 
-  <a class="all-stories" routerLink="/posts">
-    <button class="call-to-action secondary" type="button">All Stories</button>
-  </a>
-</ng-container>
+  <a class="all-stories button secondary" routerLink="/posts"> All Stories </a>
+</main>

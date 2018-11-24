@@ -1,10 +1,10 @@
 :host {
   display: block;
   background-color: #fff;
+  padding: 16px;
 }
 
 .navbar {
-  padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,7 +72,7 @@
   font-size: 1.25rem;
   text-decoration: none;
   color: var(--nav-link);
-  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 
   &:hover {
     color: black;
@@ -80,17 +80,7 @@
 }
 
 .call-to-action {
-  color: #fff;
-  background-color: var(--call-to-action);
-  border-radius: 5px;
-  padding: 0.5em 0.75rem;
-  transition: all 0.1s ease;
   display: none;
-
-  &:hover {
-    color: #fff;
-    background-color: var(--call-to-action-hover);
-  }
 }
 
 .griditem1,
@@ -133,7 +123,7 @@
 }
 
 @media screen and (min-width: 769px) {
-  .navbar {
+  :host {
     padding: 32px 16px;
   }
 }

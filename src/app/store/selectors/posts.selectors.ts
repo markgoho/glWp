@@ -19,7 +19,7 @@ export const getRecentPosts = createSelector(
       return a.modified < b.modified ? 1 : -1;
     });
 
-    return sortedPosts.slice(0, 8);
+    return sortedPosts.slice(0, 12);
   }
 );
 

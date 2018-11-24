@@ -92,32 +92,34 @@ ol {
   min-height: calc(100vh - 7rem);
 }
 
-.call-to-action {
+.button {
   box-shadow: none;
   border: none;
-  background-color: var(--call-to-action);
   font-weight: 400;
   font-size: 1.75rem;
   padding: 0.75rem 1.5rem;
   border-radius: 7px;
-  color: white;
+  color: #fff;
   text-decoration: none;
-  transition: all 0.1s ease;
   cursor: pointer;
+
+  // @media screen and (max-width: 30rem) {
+  //   display: block;
+  //   font-size: 1rem;
+  //   padding: 0.5rem 1rem;
+  //   border-radius: 4px;
+  // }
+}
+
+.button.primary {
+  background-color: var(--call-to-action);
 
   &:hover {
     background-color: var(--call-to-action-hover);
   }
-
-  @media screen and (max-width: 30rem) {
-    display: block;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-  }
 }
 
-.call-to-action.secondary {
+.button.secondary {
   background-color: var(--color-primary);
   box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
 }

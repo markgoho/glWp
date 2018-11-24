@@ -7,6 +7,8 @@
 .stories {
   color: var(--dark-header);
   min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .section-header {
@@ -24,12 +26,13 @@
   font-size: 24px;
 }
 
-@media screen and (min-width: 480px) {
-  .stories {
-    display: grid;
-    grid-template-columns: 1fr minmax(auto, 1440px) 1fr;
-  }
+.recent-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
 
+@media screen and (min-width: 480px) {
   .section-title {
     font-size: 48px;
   }

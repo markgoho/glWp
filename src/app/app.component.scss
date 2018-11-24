@@ -5,3 +5,17 @@
 .route-container > * {
   display: block;
 }
+
+.copyright {
+  grid-area: copyright;
+  font-size: 0.8rem;
+  color: #fff;
+  text-align: center;
+  background-color: var(--footer-color-dark);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 76px;
+}

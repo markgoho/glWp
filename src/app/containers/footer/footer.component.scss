@@ -1,14 +1,16 @@
 :host {
   display: block;
   background-color: var(--footer-color);
+  padding: 32px 16px;
 }
 
 .footer {
   color: rgb(255, 255, 255);
   display: grid;
+  max-width: 1280px;
+  margin: 0 auto;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
-  padding: 16px;
+  gap: 32px;
 }
 
 .footer > * {
@@ -18,11 +20,6 @@
 // .about-us {
 //   grid-area: about;
 // }
-
-.action {
-  // grid-area: action;
-  display: block;
-}
 
 // .location {
 //   grid-area: location;
@@ -71,20 +68,6 @@
 
 .nap-info {
   color: white;
-}
-
-.copyright {
-  grid-area: copyright;
-  font-size: 0.8rem;
-  color: #fff;
-  text-align: center;
-  background-color: var(--footer-color-dark);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 76px;
 }
 
 @media screen and (min-width: 480px) {

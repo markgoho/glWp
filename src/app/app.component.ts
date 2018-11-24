@@ -52,6 +52,8 @@ import { CategoryService } from './category.service';
   ],
 })
 export class AppComponent implements OnInit {
+  year = new Date().getFullYear();
+
   constructor(
     private router: Router,
     private postsService: PostsService,

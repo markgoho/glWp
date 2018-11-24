@@ -1,20 +1,18 @@
+:host {
+  display: block;
+}
+
 .paragraph-text {
-  margin: 0 0 24px 96px;
-  width: 70ch;
+  max-width: 70ch;
   font-size: 24px;
 }
 
 .image-title {
+  margin-top: 32px;
+  margin-bottom: 0;
   color: var(--color-primary);
-  margin: 96px 0 0 96px;
   font-weight: 500;
   font-size: 32px;
-}
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 32px;
 }
 
 figure {
@@ -42,9 +40,10 @@ figure {
   }
 }
 
-.separator {
-  border-top: 3px solid var(--color-primary);
-  grid-column: 2 / 8;
-  margin: 32px 96px;
-  width: 96px;
+@media screen and (min-width: 480px) {
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 32px;
+  }
 }
