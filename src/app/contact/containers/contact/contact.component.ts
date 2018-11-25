@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
@@ -11,10 +12,15 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup;
   messageSuccess = false;
 
-  constructor(private fb: FormBuilder, private afs: AngularFirestore) {}
+  constructor(
+    private fb: FormBuilder,
+    private afs: AngularFirestore,
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.titleService.setTitle('Contact Us');
   }
 
   createForm(): void {
