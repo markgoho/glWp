@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { map } from 'rxjs/operators';
+import { map, filter, tap } from 'rxjs/operators';
 
 import { CategoriesState } from './store/reducers/categories.reducer';
 import { Category } from './category/models/category.interface';
@@ -12,6 +12,7 @@ import {
   getCurrentCategory,
   getFullCategoryName,
 } from './store/selectors/categories.selectors';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +21,17 @@ export class CategoryService {
   allCategories$: Observable<Category[]>;
   currentCategory$: Observable<Category>;
 
-  constructor(private afs: AngularFirestore, private store: Store<CategoriesState>) {
+  constructor(
+    private afs: AngularFirestore,
+    private store: Store<CategoriesState>,
+    private titleService: Title
+  ) {
     this.allCategories$ = this.store.pipe(select(getAllCategories));
-    this.currentCategory$ = this.store.pipe(select(getCurrentCategory));
+    this.currentCategory$ = this.store.pipe(
+      select(getCurrentCategory),
+      filter(Boolean),
+      tap((category: Category) => this.titleService.setTitle(category.name))
+    );
   }
 
   loadAllCategories(): void {

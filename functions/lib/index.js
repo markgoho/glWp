@@ -15,8 +15,13 @@ const rp = require("request-promise-native");
 // import * as cache from 'memory-cache';
 const admin = require("firebase-admin");
 const mailgun = require("mailgun-js");
+const puppeteer = require("puppeteer");
+const renderer_1 = require("./renderer");
+const node_fetch_1 = require("node-fetch");
 admin.initializeApp();
 const db = admin.firestore();
+const appURL = 'https://staging-gideonlabs.firebaseapp.com';
+const renderURL = 'https://us-central1-gideonlabs-b4b71.cloudfunctions.net/render';
 // const app: express.Application = express();
 // const cacheTimeout = 1 * 1000 * 60;
 // // Automatically allow cross-origin requests
@@ -191,4 +196,32 @@ exports.sendContactMessage = functions.firestore
     };
     yield mg.messages().send(data);
     return snapshot.ref.update({ sent: true });
+}));
+exports.render = functions
+    .runWith({ memory: '1GB' })
+    .https.onRequest((request, response) => __awaiter(this, void 0, void 0, function* () {
+    const browser = yield puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+    const requestURL = request.query.requestURL;
+    const page = yield browser.newPage();
+    const { status, content } = yield renderer_1.serialize(page, requestURL, false);
+    response.status(status).send(content);
+}));
+exports.ssr = functions.https.onRequest((request, response) => __awaiter(this, void 0, void 0, function* () {
+    const bots = ['twitterbot', 'facbookexternalhit', 'linkedinbot', 'pinterest', 'slackbot'];
+    const userAgent = request.headers['user-agent'];
+    const isBot = bots.filter(bot => userAgent.toLowerCase().includes(bot)).length;
+    const requestURL = appURL + request.url;
+    if (isBot) {
+        const html = yield node_fetch_1.default(`${renderURL}?requestURL=${requestURL}`);
+        const body = yield html.text();
+        response.send(body.toString());
+    }
+    else {
+        const html = yield node_fetch_1.default(appURL);
+        const body = yield html.text();
+        response.send(body.toString());
+    }
 }));

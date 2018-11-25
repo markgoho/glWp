@@ -43,7 +43,8 @@
               "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": false,
-              "serviceWorker": true
+              "serviceWorker": true,
+              "progress": false
             }
           }
         },

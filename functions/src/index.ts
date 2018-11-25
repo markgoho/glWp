@@ -7,6 +7,9 @@ import * as admin from 'firebase-admin';
 import { Category } from './models/category.interface';
 import { Post } from './models/post.interface';
 import * as mailgun from 'mailgun-js';
+import * as puppeteer from 'puppeteer';
+import { serialize } from './renderer';
+import fetch from 'node-fetch';
 
 admin.initializeApp();
 
@@ -231,3 +234,39 @@ export const sendContactMessage = functions.firestore
     await mg.messages().send(data);
     return snapshot.ref.update({ sent: true });
   });
+
+export const render = functions
+  .runWith({ memory: '1GB' })
+  .https.onRequest(async (request, response) => {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
+    const requestURL = request.query.requestURL;
+    const page = await browser.newPage();
+    const { status, content } = await serialize(page, requestURL, false);
+
+    response.status(status).send(content);
+  });
+
+export const ssr = functions.https.onRequest(async (request, response) => {
+  const appURL = 'https://staging-gideonlabs.firebaseapp.com';
+  const renderURL = 'https://us-central1-gideonlabs-b4b71.cloudfunctions.net/render';
+  const bots = ['twitterbot', 'facbookexternalhit', 'linkedinbot', 'pinterest', 'slackbot'];
+
+  const userAgent = request.headers['user-agent'] as string;
+
+  const isBot = bots.filter(bot => userAgent.toLowerCase().includes(bot)).length;
+  const requestURL = appURL + request.url;
+
+  if (isBot) {
+    const html = await fetch(`${renderURL}?requestURL=${requestURL}`);
+    const body = await html.text();
+    response.send(body.toString());
+  } else {
+    const html = await fetch(appURL);
+    const body = await html.text();
+    response.send(body.toString());
+  }
+});

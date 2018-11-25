@@ -5,13 +5,14 @@ import { PostsState } from './store/reducers/posts.reducer';
 import { Store, select } from '@ngrx/store';
 import { Post } from './post/models/post.interface';
 import { QueryPosts } from './store/actions/posts.actions';
-import { map } from 'rxjs/operators';
+import { map, filter, tap } from 'rxjs/operators';
 import {
   getRecentPosts,
   getPostBySlug,
   getAllPosts,
   getPostsByCategory,
 } from './store/selectors/posts.selectors';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -22,10 +23,18 @@ export class PostsService {
   postBySlug$: Observable<Post>;
   postsByCategory$: Observable<Post[]>;
 
-  constructor(private afs: AngularFirestore, private store: Store<PostsState>) {
+  constructor(
+    private afs: AngularFirestore,
+    private store: Store<PostsState>,
+    private titleService: Title
+  ) {
     this.allPosts$ = this.store.pipe(select(getAllPosts));
     this.recentPosts$ = this.store.pipe(select(getRecentPosts));
-    this.postBySlug$ = this.store.pipe(select(getPostBySlug));
+    this.postBySlug$ = this.store.pipe(
+      select(getPostBySlug),
+      filter(Boolean),
+      tap((post: Post) => this.titleService.setTitle(post.title))
+    );
     this.postsByCategory$ = this.store.pipe(select(getPostsByCategory));
   }
 
