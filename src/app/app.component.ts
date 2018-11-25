@@ -1,12 +1,11 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { trigger, transition, group, query, style, animate } from '@angular/animations';
-import { filter } from 'rxjs/operators';
 import { PostsService } from './posts.service';
 import { CategoryService } from './category.service';
 
-// tslint:disable-next-line:no-empty no-string-literal
-const gtag: any = window['gtag'] || function(...data: any[]) {};
+// tslint:disable-next-line:no-empty no-string-literal no-unused-variable
+const gtag: any = window['gtag'] || function(..._data: any[]) {};
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
