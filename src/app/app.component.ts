@@ -4,10 +4,9 @@ import { trigger, transition, group, query, style, animate } from '@angular/anim
 import { filter } from 'rxjs/operators';
 import { PostsService } from './posts.service';
 import { CategoryService } from './category.service';
-// import { Store } from '@ngrx/store';
-// import { PostsState } from './store/reducers/posts.reducer';
-// import { LoadRecentPosts } from './store/actions/posts.actions';
-// import { LoadCategories } from './store/actions/categories.actions';
+
+// tslint:disable-next-line:no-empty no-string-literal
+const gtag: any = window['gtag'] || function(...data: any[]) {};
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,13 +57,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private postsService: PostsService,
     private categoryService: CategoryService
-  ) {
-    this.router.events
-      .pipe(filter((event: any) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        window.scrollTo(0, 0);
-      });
-  }
+  ) {}
 
   // @HostListener('window:resize', ['$event'])
   // onResize(): void {
@@ -79,5 +72,14 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.categoryService.loadAllCategories();
     this.postsService.loadAllPosts();
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+        gtag('config', 'UA-86099056-1', {
+          page_path: event.urlAfterRedirects,
+        });
+      }
+    });
   }
 }
