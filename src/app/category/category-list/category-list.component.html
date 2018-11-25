@@ -1,3 +1,12 @@
-<div *ngFor="let category of categories$ | async">
-  <a routerLink="{{ category.slug }}">{{ category.slug }}</a>
+<div class="main-content">
+  <h1>All Categories</h1>
+  <div class="separator"></div>
+  <div class="category-links">
+    <a
+      class="category-link button secondary"
+      *ngFor="let category of (categoryService.allCategories$ | async)"
+      routerLink="{{ category.slug }}"
+      >{{ category.name }}</a
+    >
+  </div>
 </div>

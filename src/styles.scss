@@ -129,6 +129,20 @@ h2 {
   margin-bottom: 32px;
 }
 
+.arrow-right {
+  stroke: var(--color-primary);
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  svg {
+    fill: var(--color-primary);
+  }
+}
+
 @media screen and (min-width: 769px) {
   .button {
     font-size: 24px;

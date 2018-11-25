@@ -3,6 +3,7 @@ import { PostsService } from '../../../posts.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store';
 import { Back } from '../../../store/actions/router.actions';
+import { CategoryService } from '../../../category.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,7 +12,11 @@ import { Back } from '../../../store/actions/router.actions';
   styleUrls: ['./post.component.scss'],
 })
 export class PostComponent {
-  constructor(public postsService: PostsService, private store: Store<AppState>) {}
+  constructor(
+    public postsService: PostsService,
+    public categoryService: CategoryService,
+    private store: Store<AppState>
+  ) {}
 
   navigateBack(): void {
     this.store.dispatch(new Back());

@@ -1,12 +1,17 @@
 <div class="main-content" *ngIf="(postsService.postBySlug$ | async) as post">
-  <div (click)="navigateBack()" class="navigate-back">
-    <div class="arrow"></div>
-    Back
-  </div>
-
   <h1 class="post-title">{{ post.title }}</h1>
   <div class="separator"></div>
   <app-post-content [content]="post.content"></app-post-content>
 
-  <a class="all-stories button secondary" routerLink="/posts"> All Stories </a>
+  <h2 class="other-categories">This story appears in the following categories:</h2>
+  <div class="story-links">
+    <a
+      *ngFor="let category of post.categoryArray"
+      class="button secondary"
+      routerLink="/posts/category/{{ category }}"
+      >{{ categoryService.getFullCategoryName(category) | async }}</a
+    >
+  </div>
+
+  <a class="all-stories button secondary" routerLink="/posts">All Stories</a>
 </div>

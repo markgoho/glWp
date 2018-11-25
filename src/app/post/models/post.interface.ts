@@ -6,7 +6,7 @@ export interface Post {
   title: string;
   content: string;
   excerpt: string;
-  categoriesArray: string[];
+  categoryArray: string[];
   categoryMap: {
     [slug: string]: boolean;
   };

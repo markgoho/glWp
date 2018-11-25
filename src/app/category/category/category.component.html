@@ -1,9 +1,19 @@
-<ng-container *ngIf="category$ | async as category">
-  <h1>{{ category.name }}</h1>
-  <div>{{ category.count }} posts</div>
-</ng-container>
+<div class="main-content" *ngIf="(categoryService.currentCategory$ | async) as category">
+  <div class="breadcrumbs">
+    <a routerLink="/posts/category">All Categories</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+      <path fill="none" d="M0 0h24v24H0V0z" />
+    </svg>
+    <a routerLink="/posts/category/{{ category.slug }}">{{ category.name }} </a>
+  </div>
+  <ng-container>
+    <h1>{{ category.name }} Success Stories</h1>
+    <div class="separator"></div>
+  </ng-container>
 
-
-<div *ngFor="let post of posts$ | async">
-  <a [routerLink]="['/posts', post.slug]">{{ post.title }}</a>
+  <div class="posts-container">
+    <app-post-snippet *ngFor="let post of (postsService.postsByCategory$ | async)" [post]="post">
+    </app-post-snippet>
+  </div>
 </div>

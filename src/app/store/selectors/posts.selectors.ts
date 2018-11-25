@@ -28,3 +28,13 @@ export const getPostBySlug = createSelector(
   getParams,
   (postEntities, params) => postEntities[params.postSlug]
 );
+
+export const getPostsByCategory = createSelector(
+  getAllPosts,
+  getParams,
+  (posts, params) => {
+    return posts.filter(post => {
+      return post.categoryArray.includes(params.categorySlug);
+    });
+  }
+);

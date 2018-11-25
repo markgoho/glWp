@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  padding: 16px;
+}
+
+.main-content {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.category-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.category-link {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 769px) {
+  :host {
+    padding: 32px 16px;
+  }
+}

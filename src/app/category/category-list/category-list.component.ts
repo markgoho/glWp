@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Category } from '../models/category.interface';
-import { Observable } from 'rxjs';
+
+import { CategoryService } from '../../category.service';
 
 @Component({
   selector: 'app-category-list',
@@ -9,9 +8,5 @@ import { Observable } from 'rxjs';
   styleUrls: ['./category-list.component.scss'],
 })
 export class CategoryListComponent {
-  categories$: Observable<Category[]>;
-
-  constructor(private db: AngularFirestore) {
-    this.categories$ = this.db.collection<Category>('categories').valueChanges();
-  }
+  constructor(public categoryService: CategoryService) {}
 }
