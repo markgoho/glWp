@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: './contact/contact.module#ContactModule',
   },
   {
+    path: 'history',
+    loadChildren: './history/history.module#HistoryModule',
+  },
+  {
     path: 'posts/category',
     loadChildren: './category/category.module#CategoryModule',
     data: { depth: 1 },
