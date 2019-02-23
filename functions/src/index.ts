@@ -1,8 +1,5 @@
 import * as functions from 'firebase-functions';
-// import * as express from 'express';
-// import * as cors from 'cors';
 import * as rp from 'request-promise-native';
-// import * as cache from 'memory-cache';
 import * as admin from 'firebase-admin';
 import { Category } from './models/category.interface';
 import { Post } from './models/post.interface';
@@ -14,7 +11,7 @@ admin.initializeApp();
 
 const db = admin.firestore();
 
-export const updateCategories = functions.https.onRequest(async (req, res) => {
+export const updateCategories = functions.https.onRequest(async (_req, res) => {
   let allCategories: Category[];
 
   const options = {
@@ -54,7 +51,7 @@ export const updateCategories = functions.https.onRequest(async (req, res) => {
   return res.status(200).send(`Categories updated.`);
 });
 
-export const updatePosts = functions.https.onRequest(async (req, res) => {
+export const updatePosts = functions.https.onRequest(async (_req, res) => {
   let allPosts: Post[];
 
   const options = {

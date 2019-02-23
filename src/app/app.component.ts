@@ -4,8 +4,7 @@ import { trigger, transition, group, query, style, animate } from '@angular/anim
 import { PostsService } from './posts.service';
 import { CategoryService } from './category.service';
 
-// tslint:disable-next-line:no-empty no-string-literal no-unused-variable
-const gtag: any = window['gtag'] || function(..._data: any[]) {};
+declare var gtag: any;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
