@@ -8,75 +8,12 @@ import { Category } from './models/category.interface';
 import { Post } from './models/post.interface';
 import * as mailgun from 'mailgun-js';
 import * as puppeteer from 'puppeteer';
-import { serialize } from './renderer';
 import fetch from 'node-fetch';
 
 admin.initializeApp();
 
 const db = admin.firestore();
 
-// const app: express.Application = express();
-// const cacheTimeout = 1 * 1000 * 60;
-
-// // Automatically allow cross-origin requests
-// app.use(cors({ origin: true }));
-
-// app.get('/api/posts', async (req, res) => {
-//   let posts;
-
-//   if (cache.get('posts')) {
-//     posts = cache.get('posts');
-//   } else {
-//     posts = await rp('https://admin.gideonlabs.com/wp-json/wp/v2/posts', { json: true });
-//     cache.put('posts', posts, cacheTimeout);
-//   }
-//   res.set('Cache-Control', 'public, max-age=600, s-maxage=1200');
-//   return res.status(200).json(posts);
-// });
-
-// app.get('/api/recent-posts', async (req, res) => {
-//   let recentPosts;
-
-//   if (cache.get('recentPosts')) {
-//     recentPosts = cache.get('recentPosts');
-//   } else {
-//     recentPosts = await rp(
-//       'https://admin.gideonlabs.com/wp-json/wp/v2/posts?per_page=8&_embed=true',
-//       { json: true }
-//     );
-//     cache.put('recentPosts', recentPosts, cacheTimeout);
-//   }
-//   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
-//   return res.status(200).json(recentPosts);
-// });
-
-// app.get('/api/categories', async (req, res) => {
-//   let allCategories;
-
-//   const options = {
-//     method: 'GET',
-//     uri: 'https://admin.gideonlabs.com/wp-json/wp/v2/categories',
-//     resolveWithFullResponse: true,
-//     json: true,
-//   };
-
-//   if (cache.get('categories')) {
-//     allCategories = cache.get('categories');
-//   } else {
-//     const categories = await rp(options);
-//     const totalNumber = categories.headers['x-wp-total'];
-//     allCategories = await rp(
-//       `https://admin.gideonlabs.com/wp-json/wp/v2/categories?per_page=${totalNumber}`,
-//       { json: true }
-//     );
-//     cache.put('categories', allCategories, cacheTimeout);
-//   }
-//   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
-//   return res.status(200).json(allCategories);
-// });
-
-// // Expose Express API as a single Cloud Function:
-// export const api = functions.https.onRequest(app);
 export const updateCategories = functions.https.onRequest(async (req, res) => {
   let allCategories: Category[];
 
@@ -234,39 +171,3 @@ export const sendContactMessage = functions.firestore
     await mg.messages().send(data);
     return snapshot.ref.update({ sent: true });
   });
-
-export const render = functions
-  .runWith({ memory: '1GB' })
-  .https.onRequest(async (request, response) => {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-
-    const requestURL = request.query.requestURL;
-    const page = await browser.newPage();
-    const { status, content } = await serialize(page, requestURL, false);
-
-    response.status(status).send(content);
-  });
-
-export const ssr = functions.https.onRequest(async (request, response) => {
-  const appURL = 'https://staging-gideonlabs.firebaseapp.com';
-  const renderURL = 'https://us-central1-gideonlabs-b4b71.cloudfunctions.net/render';
-  const bots = ['twitterbot', 'facbookexternalhit', 'linkedinbot', 'pinterest', 'slackbot'];
-
-  const userAgent = request.headers['user-agent'] as string;
-
-  const isBot = bots.filter(bot => userAgent.toLowerCase().includes(bot)).length;
-  const requestURL = appURL + request.url;
-
-  if (isBot) {
-    const html = await fetch(`${renderURL}?requestURL=${requestURL}`);
-    const body = await html.text();
-    response.send(body.toString());
-  } else {
-    const html = await fetch(appURL);
-    const body = await html.text();
-    response.send(body.toString());
-  }
-});
