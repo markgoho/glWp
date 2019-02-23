@@ -9,73 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
-// import * as express from 'express';
-// import * as cors from 'cors';
 const rp = require("request-promise-native");
-// import * as cache from 'memory-cache';
 const admin = require("firebase-admin");
 const mailgun = require("mailgun-js");
-const puppeteer = require("puppeteer");
-const renderer_1 = require("./renderer");
-const node_fetch_1 = require("node-fetch");
 admin.initializeApp();
 const db = admin.firestore();
-const appURL = 'https://staging-gideonlabs.firebaseapp.com';
-const renderURL = 'https://us-central1-gideonlabs-b4b71.cloudfunctions.net/render';
-// const app: express.Application = express();
-// const cacheTimeout = 1 * 1000 * 60;
-// // Automatically allow cross-origin requests
-// app.use(cors({ origin: true }));
-// app.get('/api/posts', async (req, res) => {
-//   let posts;
-//   if (cache.get('posts')) {
-//     posts = cache.get('posts');
-//   } else {
-//     posts = await rp('https://admin.gideonlabs.com/wp-json/wp/v2/posts', { json: true });
-//     cache.put('posts', posts, cacheTimeout);
-//   }
-//   res.set('Cache-Control', 'public, max-age=600, s-maxage=1200');
-//   return res.status(200).json(posts);
-// });
-// app.get('/api/recent-posts', async (req, res) => {
-//   let recentPosts;
-//   if (cache.get('recentPosts')) {
-//     recentPosts = cache.get('recentPosts');
-//   } else {
-//     recentPosts = await rp(
-//       'https://admin.gideonlabs.com/wp-json/wp/v2/posts?per_page=8&_embed=true',
-//       { json: true }
-//     );
-//     cache.put('recentPosts', recentPosts, cacheTimeout);
-//   }
-//   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
-//   return res.status(200).json(recentPosts);
-// });
-// app.get('/api/categories', async (req, res) => {
-//   let allCategories;
-//   const options = {
-//     method: 'GET',
-//     uri: 'https://admin.gideonlabs.com/wp-json/wp/v2/categories',
-//     resolveWithFullResponse: true,
-//     json: true,
-//   };
-//   if (cache.get('categories')) {
-//     allCategories = cache.get('categories');
-//   } else {
-//     const categories = await rp(options);
-//     const totalNumber = categories.headers['x-wp-total'];
-//     allCategories = await rp(
-//       `https://admin.gideonlabs.com/wp-json/wp/v2/categories?per_page=${totalNumber}`,
-//       { json: true }
-//     );
-//     cache.put('categories', allCategories, cacheTimeout);
-//   }
-//   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
-//   return res.status(200).json(allCategories);
-// });
-// // Expose Express API as a single Cloud Function:
-// export const api = functions.https.onRequest(app);
-exports.updateCategories = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.updateCategories = functions.https.onRequest((_req, res) => __awaiter(this, void 0, void 0, function* () {
     let allCategories;
     const options = {
         method: 'GET',
@@ -104,7 +43,7 @@ exports.updateCategories = functions.https.onRequest((req, res) => __awaiter(thi
     }
     return res.status(200).send(`Categories updated.`);
 }));
-exports.updatePosts = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
+exports.updatePosts = functions.https.onRequest((_req, res) => __awaiter(this, void 0, void 0, function* () {
     let allPosts;
     const options = {
         method: 'GET',
@@ -197,31 +136,17 @@ exports.sendContactMessage = functions.firestore
     yield mg.messages().send(data);
     return snapshot.ref.update({ sent: true });
 }));
-exports.render = functions
-    .runWith({ memory: '1GB' })
-    .https.onRequest((request, response) => __awaiter(this, void 0, void 0, function* () {
-    const browser = yield puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-    const requestURL = request.query.requestURL;
-    const page = yield browser.newPage();
-    const { status, content } = yield renderer_1.serialize(page, requestURL, false);
-    response.status(status).send(content);
-}));
-exports.ssr = functions.https.onRequest((request, response) => __awaiter(this, void 0, void 0, function* () {
-    const bots = ['twitterbot', 'facbookexternalhit', 'linkedinbot', 'pinterest', 'slackbot'];
-    const userAgent = request.headers['user-agent'];
-    const isBot = bots.filter(bot => userAgent.toLowerCase().includes(bot)).length;
-    const requestURL = appURL + request.url;
-    if (isBot) {
-        const html = yield node_fetch_1.default(`${renderURL}?requestURL=${requestURL}`);
-        const body = yield html.text();
-        response.send(body.toString());
-    }
-    else {
-        const html = yield node_fetch_1.default(appURL);
-        const body = yield html.text();
-        response.send(body.toString());
-    }
+exports.verifyRecaptcha = functions.https.onRequest((req, res) => __awaiter(this, void 0, void 0, function* () {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'GET');
+    const secret = '6LdbEH4UAAAAAG-c6MEKcnokAIBrl332_4Ljlz1_';
+    const response = req.query.token;
+    const options = {
+        method: 'POST',
+        uri: `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`,
+        resolveWithFullResponse: true,
+        json: true,
+    };
+    const { body: verification } = yield rp(options);
+    res.status(200).send(verification);
 }));

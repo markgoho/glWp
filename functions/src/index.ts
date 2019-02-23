@@ -1,20 +1,16 @@
 import * as functions from 'firebase-functions';
-// import * as express from 'express';
-// import * as cors from 'cors';
 import * as rp from 'request-promise-native';
-// import * as cache from 'memory-cache';
 import * as admin from 'firebase-admin';
 import { Category } from './models/category.interface';
 import { Post } from './models/post.interface';
 import * as mailgun from 'mailgun-js';
-import * as puppeteer from 'puppeteer';
-import fetch from 'node-fetch';
+import * as cors from 'cors';
 
 admin.initializeApp();
 
 const db = admin.firestore();
 
-export const updateCategories = functions.https.onRequest(async (req, res) => {
+export const updateCategories = functions.https.onRequest(async (_req, res) => {
   let allCategories: Category[];
 
   const options = {
@@ -54,7 +50,7 @@ export const updateCategories = functions.https.onRequest(async (req, res) => {
   return res.status(200).send(`Categories updated.`);
 });
 
-export const updatePosts = functions.https.onRequest(async (req, res) => {
+export const updatePosts = functions.https.onRequest(async (_req, res) => {
   let allPosts: Post[];
 
   const options = {
@@ -171,3 +167,22 @@ export const sendContactMessage = functions.firestore
     await mg.messages().send(data);
     return snapshot.ref.update({ sent: true });
   });
+
+export const verifyRecaptcha = functions.https.onRequest(async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET');
+
+  const secret = '6LdbEH4UAAAAAG-c6MEKcnokAIBrl332_4Ljlz1_';
+  const response = req.query.token;
+
+  const options = {
+    method: 'POST',
+    uri: `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${response}`,
+    resolveWithFullResponse: true,
+    json: true,
+  };
+
+  const { body: verification } = await rp(options);
+
+  res.status(200).send(verification);
+});

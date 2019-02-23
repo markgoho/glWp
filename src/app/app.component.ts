@@ -8,7 +8,6 @@ import { CategoryService } from './category.service';
 const gtag: any = window['gtag'] || function(..._data: any[]) {};
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

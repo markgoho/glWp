@@ -3,7 +3,7 @@
   <div class="separator"></div>
 
   <div class="container">
-    <form [formGroup]="contactForm">
+    <form [formGroup]="contactForm" *ngIf="!formSubmitted; else formResults">
       <label for="name">Name: <input type="text" id="name" formControlName="name" /> </label>
       <label for="phone"
         >Phone Number: <input type="text" id="phone" formControlName="phone" />
@@ -18,7 +18,7 @@
         class="button secondary"
         type="button"
         (click)="submitForm()"
-        *ngIf="!messageSuccess; else: messageSent"
+        [disabled]="!contactForm.valid"
       >
         Send
       </button>
@@ -39,10 +39,16 @@
       </div>
     </div>
   </div>
-
-  <ng-template #messageSent>
-    <div class="message-sent">
-      Your message has been sent. Please allow some time to review the request.
-    </div>
-  </ng-template>
 </div>
+
+<ng-template #formResults>
+  <div class="form-results">
+    <div class="sending-message" *ngIf="messageSending">
+      Sending...
+    </div>
+
+    <div class="message-sent" *ngIf="!messageSending">
+      {{ sendingResult }}
+    </div>
+  </div>
+</ng-template>

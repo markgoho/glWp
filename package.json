@@ -31,6 +31,7 @@
     "angularfire2": "^5.1.1",
     "core-js": "^2.6.5",
     "firebase": "^5.8.4",
+    "ng-recaptcha": "^4.3.0-beta.1",
     "rxjs": "^6.4.0",
     "zone.js": "^0.8.29"
   },

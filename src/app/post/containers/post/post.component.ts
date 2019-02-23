@@ -6,7 +6,6 @@ import { Back } from '../../../store/actions/router.actions';
 import { CategoryService } from '../../../category.service';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
