@@ -10,7 +10,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy:staging": "ng build --configuration production && firebase deploy --only hosting:staging",
-    "deploy:production": "ng build --configuration production && firebase deploy --only hosting:production"
+    "deploy:production": "ng build --configuration production && firebase deploy --only hosting:production",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node dist/server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run glWp:server:production"
   },
   "private": true,
   "dependencies": {
@@ -22,14 +26,18 @@
     "@angular/http": "^7.2.6",
     "@angular/platform-browser": "^7.2.6",
     "@angular/platform-browser-dynamic": "^7.2.6",
+    "@angular/platform-server": "^7.2.6",
     "@angular/router": "^7.2.6",
     "@angular/service-worker": "^7.2.6",
     "@ngrx/effects": "^7.2.0",
     "@ngrx/entity": "^7.2.0",
     "@ngrx/router-store": "^7.2.0",
     "@ngrx/store": "^7.2.0",
+    "@nguniversal/express-engine": "^7.1.0",
+    "@nguniversal/module-map-ngfactory-loader": "0.0.0",
     "angularfire2": "^5.1.1",
     "core-js": "^2.6.5",
+    "express": "^4.15.2",
     "firebase": "^5.8.4",
     "rxjs": "^6.4.0",
     "zone.js": "^0.8.29"
@@ -56,8 +64,10 @@
     "karma-jasmine-html-reporter": "^1.4.0",
     "ngrx-store-freeze": "^0.2.4",
     "protractor": "^5.4.2",
+    "ts-loader": "^5.2.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.12.1",
-    "typescript": "~3.2.4"
+    "typescript": "~3.2.4",
+    "webpack-cli": "^3.1.0"
   }
 }

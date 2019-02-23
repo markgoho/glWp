@@ -26,7 +26,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production ? [store
 @NgModule({
   declarations: [AppComponent, FooterComponent, NavbarComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
