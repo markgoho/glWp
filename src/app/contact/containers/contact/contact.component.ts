@@ -4,7 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Title } from '@angular/platform-browser';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap, tap, catchError } from 'rxjs/operators';
 import { Observable, Subscription, of } from 'rxjs';
 
 interface VerificationResponse {
@@ -105,22 +105,22 @@ export class ContactComponent implements OnInit {
               this.messageSending = false;
               return of('No way buddy');
             }
-          })
+          }),
+          catchError(() => of(null))
         )
         .subscribe();
     }
   }
 
   getVerification(): Observable<VerificationResponse> {
-    return this.recaptcha
-      .execute('contact')
-      .pipe(
-        switchMap(token =>
-          this.http.get<VerificationResponse>(
-            `https://us-central1-gideonlabs-b4b71.cloudfunctions.net/verifyRecaptcha?token=${token}`
-          )
+    return this.recaptcha.execute('contact').pipe(
+      switchMap(token =>
+        this.http.get<VerificationResponse>(
+          `https://us-central1-gideonlabs-b4b71.cloudfunctions.net/verifyRecaptcha?token=${token}`
         )
-      );
+      ),
+      catchError(() => of(null))
+    );
   }
 
   async sendFormData(value: any) {
