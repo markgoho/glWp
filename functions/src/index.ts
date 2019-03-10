@@ -1,10 +1,10 @@
 import * as functions from 'firebase-functions';
 import * as rp from 'request-promise-native';
+import * as mailgun from 'mailgun-js';
 import * as admin from 'firebase-admin';
+
 import { Category } from './models/category.interface';
 import { Post } from './models/post.interface';
-import * as mailgun from 'mailgun-js';
-import * as cors from 'cors';
 
 admin.initializeApp();
 

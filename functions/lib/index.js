@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 const rp = require("request-promise-native");
-const admin = require("firebase-admin");
 const mailgun = require("mailgun-js");
+const admin = require("firebase-admin");
 admin.initializeApp();
 const db = admin.firestore();
 exports.updateCategories = functions.https.onRequest((_req, res) => __awaiter(this, void 0, void 0, function* () {
