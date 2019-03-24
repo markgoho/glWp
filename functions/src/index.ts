@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import * as rp from 'request-promise-native';
 import * as mailgun from 'mailgun-js';
 import * as admin from 'firebase-admin';
+import * as algoliasearch from 'algoliasearch';
 
 import { Category } from './models/category.interface';
 import { Post } from './models/post.interface';
@@ -9,6 +10,10 @@ import { Post } from './models/post.interface';
 admin.initializeApp();
 
 const db = admin.firestore();
+
+const env = functions.config();
+const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
+const index = client.initIndex('POSTS');
 
 export const updateCategories = functions.https.onRequest(async (_req, res) => {
   let allCategories: Category[];
@@ -125,6 +130,7 @@ export const updatePosts = functions.https.onRequest(async (_req, res) => {
   for (let i = 0; i < postsLength; ++i) {
     const postSlug = finalPosts[i].slug;
     try {
+      console.log('Updating post', postSlug);
       await postRef.doc(postSlug).set(finalPosts[i]);
     } catch (e) {
       console.log('There was an error trying to set a post to', postSlug);
@@ -185,4 +191,28 @@ export const verifyRecaptcha = functions.https.onRequest(async (req, res) => {
   const { body: verification } = await rp(options);
 
   res.status(200).send(verification);
+});
+
+export const addPostsToAlgolia = functions.https.onRequest(async (_req, res) => {
+  const postsRef = db.collection('posts');
+  const allPosts = await postsRef.get();
+
+  const postsPromises = [];
+  allPosts.forEach(snapshot => {
+    const post = snapshot.data();
+
+    postsPromises.push(
+      index.addObject({
+        objectID: snapshot.id,
+        alt: post.media.alt,
+        categories: post.categoryArray,
+        content: post.content,
+        title: post.title,
+      })
+    );
+  });
+
+  await Promise.all(postsPromises);
+
+  return res.status(200).send('Posts added to Algolia');
 });

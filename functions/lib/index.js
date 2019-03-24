@@ -12,8 +12,12 @@ const functions = require("firebase-functions");
 const rp = require("request-promise-native");
 const mailgun = require("mailgun-js");
 const admin = require("firebase-admin");
+const algoliasearch = require("algoliasearch");
 admin.initializeApp();
 const db = admin.firestore();
+const env = functions.config();
+const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
+const index = client.initIndex('POSTS');
 exports.updateCategories = functions.https.onRequest((_req, res) => __awaiter(this, void 0, void 0, function* () {
     let allCategories;
     const options = {
@@ -99,6 +103,7 @@ exports.updatePosts = functions.https.onRequest((_req, res) => __awaiter(this, v
     for (let i = 0; i < postsLength; ++i) {
         const postSlug = finalPosts[i].slug;
         try {
+            console.log('Updating post', postSlug);
             yield postRef.doc(postSlug).set(finalPosts[i]);
         }
         catch (e) {
@@ -149,4 +154,21 @@ exports.verifyRecaptcha = functions.https.onRequest((req, res) => __awaiter(this
     };
     const { body: verification } = yield rp(options);
     res.status(200).send(verification);
+}));
+exports.addPostsToAlgolia = functions.https.onRequest((_req, res) => __awaiter(this, void 0, void 0, function* () {
+    const postsRef = db.collection('posts');
+    const allPosts = yield postsRef.get();
+    const postsPromises = [];
+    allPosts.forEach(snapshot => {
+        const post = snapshot.data();
+        postsPromises.push(index.addObject({
+            objectID: snapshot.id,
+            alt: post.media.alt,
+            categories: post.categoryArray,
+            content: post.content,
+            title: post.title,
+        }));
+    });
+    yield Promise.all(postsPromises);
+    return res.status(200).send('Posts added to Algolia');
 }));
