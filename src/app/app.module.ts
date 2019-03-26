@@ -20,11 +20,12 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { reducers, effects } from './store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './store/reducers/router.reducer';
+import { SearchComponent } from './search/search.component';
 
 export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, NavbarComponent],
+  declarations: [AppComponent, FooterComponent, NavbarComponent, SearchComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

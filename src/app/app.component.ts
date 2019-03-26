@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { trigger, transition, group, query, style, animate } from '@angular/animations';
 import { PostsService } from './posts.service';
 import { CategoryService } from './category.service';
+import { SearchService } from './search.service';
 
 // tslint:disable-next-line:no-empty no-string-literal no-unused-variable
 const gtag: any = window['gtag'] || function(..._data: any[]) {};
@@ -54,7 +55,8 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private postsService: PostsService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    public searchService: SearchService
   ) {}
 
   // @HostListener('window:resize', ['$event'])

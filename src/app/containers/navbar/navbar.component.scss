@@ -46,8 +46,8 @@
 }
 
 .search-bar {
+  display: flex;
   align-items: center;
-  display: none;
 
   svg {
     fill: var(--nav-link);

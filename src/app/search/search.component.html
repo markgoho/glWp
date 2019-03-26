@@ -1,0 +1,20 @@
+<div class="algolia-hits">
+  <input
+    placeholder="search success stories"
+    class="algolia-input"
+    type="text"
+    #searchInput
+    (keyup)="handleSearch(searchInput.value)"
+  />
+
+  <button (click)="searchService.hideSearch()">close</button>
+
+  <div class="algolia-hit" *ngFor="let hit of hits">
+    {{ hit | json }}
+    <!-- <h4>
+      <span class="hit-title" [innerHtml]="hit._highlightResult.title.value"></span>
+      <span class="hit-type" [ngClass]="'hit-' + hit.type"> in {{ hit.type }}</span>
+    </h4>
+    <p class="hit-description" [innerHtml]="hit._highlightResult.description.value"></p> -->
+  </div>
+</div>

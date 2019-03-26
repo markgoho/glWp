@@ -6,3 +6,5 @@
 
 <app-footer></app-footer>
 <div class="copyright">&copy; {{ year }} Gideon Analytical Labs, Inc.</div>
+
+<app-search *ngIf="(searchService.searching$ | async)"></app-search>
