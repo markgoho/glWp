@@ -1,4 +1,4 @@
-<ng-container *ngIf="(inView$ | async); else linkOnly">
+<a [routerLink]="['/posts', post.slug]" *ngIf="(inView$ | async)">
   <div class="img-container">
     <img *ngIf="post.media.image; else logo" [src]="post.media.image.source_url" />
   </div>
@@ -10,13 +10,7 @@
     <div class="separator"></div>
     <div class="excerpt" [innerHTML]="post.excerpt"></div>
   </div>
-
-  <a [routerLink]="['/posts', post.slug]" class="read-more"> Read more </a>
-</ng-container>
-
-<ng-template #linkOnly>
-  <a [routerLink]="['/posts', post.slug]" class="read-more"> Read more </a>
-</ng-template>
+</a>
 
 <ng-template #logo>
   <div class="svg-container">

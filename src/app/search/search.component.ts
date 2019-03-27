@@ -1,9 +1,32 @@
 import { Component, OnInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { SearchService } from '../search.service';
 import * as algolia from 'algoliasearch/lite';
+import { PostSnippet } from '../post/models/postSnippet';
 const APP_ID = 'VBY10K87KH';
 const API_KEY = '6e973bbf671a43c9edcb39a069a64637';
 const client = algolia(APP_ID, API_KEY);
+
+interface HighlightResult {
+  fullyHighlighted?: boolean;
+  matchLevel: string;
+  matchedWords: string[];
+  value: string;
+}
+interface AlgoliaPost {
+  alt: string;
+  categories: string[];
+  content: string;
+  excerpt: string;
+  featuredImage: string;
+  objectID: string;
+  title: string;
+  _highlightResult: {
+    excerpt: HighlightResult;
+    title: HighlightResult;
+  };
+}
+
+const parser = new DOMParser();
 
 @Component({
   selector: 'app-search',
@@ -34,11 +57,25 @@ export class SearchComponent implements OnInit {
 
   handleSearch(query: string) {
     this.query = query;
-    this.index.search({ query }, (_err, res) => {
+    this.index.search<AlgoliaPost>({ query }, (_err, res) => {
       this.results = res;
-      this.hits = res.hits;
-      // this.cd.detectChanges();
+      this.hits = this.prepareHits(res.hits);
     });
-    // this.cd.detectChanges();
+  }
+
+  private prepareHits(hits: AlgoliaPost[]): PostSnippet[] {
+    return hits.map(hit => {
+      return {
+        title: hit._highlightResult.title.value,
+        excerpt: hit._highlightResult.excerpt.value,
+        slug: hit.objectID,
+        media: {
+          alt: hit.alt,
+          image: {
+            source_url: hit.featuredImage,
+          },
+        },
+      };
+    });
   }
 }

@@ -39,7 +39,7 @@
   color: #fff;
   outline: none;
   border: none;
-  font-size: 5vw;
+  font-size: 4vmax;
   display: block;
   border-bottom: 5px solid;
   width: 100%;
@@ -53,31 +53,33 @@
 .algolia-hits {
   width: auto;
   height: 100%;
-  padding: 5em;
+  padding: 16px;
   overflow-y: scroll;
   @include scrollbar;
-  em {
-    color: #09c372;
-  }
-  h4,
-  p {
-    margin: 0.25em;
-  }
-
-  p {
-    color: #b2becd;
-    font-size: 0.85em;
-  }
 }
 
-.algolia-hit {
-  border-bottom: 2px solid #2a2a35;
-  display: block;
-  margin-top: 0.5em;
+.hit-list {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
 
-  .hit-type {
-    color: #b2becd;
-    font-size: 0.9em;
-    font-weight: 400;
+.close-search {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 2;
+}
+
+@media screen and (min-width: 769px) {
+  .algolia-hits {
+    padding: 5em;
+  }
+
+  .close-search {
+    background-color: transparent;
   }
 }

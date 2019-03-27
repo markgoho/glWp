@@ -197,7 +197,7 @@ export const addPostsToAlgolia = functions.https.onRequest(async (_req, res) => 
   const postsRef = db.collection('posts');
   const allPosts = await postsRef.get();
 
-  const postsPromises = [];
+  const postsPromises: Promise<algoliasearch.Task>[] = [];
   allPosts.forEach(snapshot => {
     const post = snapshot.data();
 
@@ -208,6 +208,8 @@ export const addPostsToAlgolia = functions.https.onRequest(async (_req, res) => 
         categories: post.categoryArray,
         content: post.content,
         title: post.title,
+        excerpt: post.excerpt,
+        featuredImage: post.media.image.source_url,
       })
     );
   });

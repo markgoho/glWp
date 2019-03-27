@@ -167,6 +167,8 @@ exports.addPostsToAlgolia = functions.https.onRequest((_req, res) => __awaiter(t
             categories: post.categoryArray,
             content: post.content,
             title: post.title,
+            excerpt: post.excerpt,
+            featuredImage: post.media.image.source_url,
         }));
     });
     yield Promise.all(postsPromises);

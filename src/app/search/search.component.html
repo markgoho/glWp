@@ -7,14 +7,21 @@
     (keyup)="handleSearch(searchInput.value)"
   />
 
-  <button (click)="searchService.hideSearch()">close</button>
+  <div class="close-search" (click)="searchService.hideSearch()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+      <path
+        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        fill="#fff"
+      />
+      <path d="M0 0h24v24H0z" fill="none" />
+    </svg>
+  </div>
 
-  <div class="algolia-hit" *ngFor="let hit of hits">
-    {{ hit | json }}
-    <!-- <h4>
-      <span class="hit-title" [innerHtml]="hit._highlightResult.title.value"></span>
-      <span class="hit-type" [ngClass]="'hit-' + hit.type"> in {{ hit.type }}</span>
-    </h4>
-    <p class="hit-description" [innerHtml]="hit._highlightResult.description.value"></p> -->
+  <div class="hit-list">
+    <app-search-snippet
+      (click)="searchService.hideSearch()"
+      *ngFor="let hit of hits"
+      [post]="hit"
+    ></app-search-snippet>
   </div>
 </div>

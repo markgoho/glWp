@@ -24,7 +24,7 @@
   grid-template-columns: repeat(6, min-content);
 
   text-decoration: none;
-  color: black;
+  color: var(--color-primary-dark);
   line-height: 0.8;
 }
 
@@ -48,14 +48,20 @@
 .search-bar {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 60px;
 
   svg {
     fill: var(--nav-link);
     cursor: pointer;
+    transform: scale(1);
+    transition: all 0.2s ease-out;
   }
 
   svg:hover {
     fill: black;
+    transform: scale(1.3);
   }
 }
 
