@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { PostsService } from '../../../posts.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store';

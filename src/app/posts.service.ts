@@ -11,32 +11,30 @@ import {
   getPostBySlug,
   getAllPosts,
   getPostsByCategory,
+  getPostEntities,
 } from './store/selectors/posts.selectors';
 import { Title } from '@angular/platform-browser';
+import { Dictionary } from '@ngrx/entity';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
-  allPosts$: Observable<Post[]>;
-  recentPosts$: Observable<Post[]>;
-  postBySlug$: Observable<Post>;
-  postsByCategory$: Observable<Post[]>;
+  allPosts$: Observable<Post[]> = this.store.pipe(select(getAllPosts));
+  recentPosts$: Observable<Post[]> = this.store.pipe(select(getRecentPosts));
+  postBySlug$: Observable<Post> = this.store.pipe(
+    select(getPostBySlug),
+    filter(Boolean),
+    tap((post: Post) => this.titleService.setTitle(post.title))
+  );
+  postsByCategory$: Observable<Post[]> = this.store.pipe(select(getPostsByCategory));
+  postEntities$: Observable<Dictionary<Post>> = this.store.pipe(select(getPostEntities));
 
   constructor(
     private afs: AngularFirestore,
     private store: Store<PostsState>,
     private titleService: Title
-  ) {
-    this.allPosts$ = this.store.pipe(select(getAllPosts));
-    this.recentPosts$ = this.store.pipe(select(getRecentPosts));
-    this.postBySlug$ = this.store.pipe(
-      select(getPostBySlug),
-      filter(Boolean),
-      tap((post: Post) => this.titleService.setTitle(post.title))
-    );
-    this.postsByCategory$ = this.store.pipe(select(getPostsByCategory));
-  }
+  ) {}
 
   loadAllPosts(): void {
     this.store.dispatch(new QueryPosts());

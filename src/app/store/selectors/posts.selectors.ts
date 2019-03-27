@@ -12,6 +12,11 @@ export const getAllPosts = createSelector(
   posts => posts
 );
 
+export const getPostEntities = createSelector(
+  selectEntities,
+  entities => entities
+);
+
 export const getRecentPosts = createSelector(
   getAllPosts,
   (posts: Post[]) => {

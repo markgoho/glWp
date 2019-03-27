@@ -20,11 +20,12 @@ import { reducers, effects } from './store';
 import { CustomSerializer } from './store/reducers/router.reducer';
 import { SearchComponent } from './search/search.component';
 import { SharedModule } from './shared/shared.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, NavbarComponent, SearchComponent],
+  declarations: [AppComponent, FooterComponent, NavbarComponent, SearchComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
