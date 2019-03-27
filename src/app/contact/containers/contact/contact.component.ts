@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Title } from '@angular/platform-browser';
@@ -6,6 +6,7 @@ import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { filter, map, switchMap, tap, catchError } from 'rxjs/operators';
 import { Observable, Subscription, of } from 'rxjs';
+import { firestore } from 'firebase/app';
 
 interface VerificationResponse {
   success: boolean;
@@ -21,7 +22,7 @@ interface VerificationResponse {
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, OnDestroy {
   contactForm: FormGroup;
   messageSending = false;
   messageSent = false;
@@ -84,6 +85,10 @@ export class ContactComponent implements OnInit {
       this.formSubmitted = true;
       this.messageSending = true;
       const { value } = this.contactForm;
+      const contactFormMessage = {
+        ...value,
+        submitted: firestore.Timestamp.fromDate(new Date()),
+      };
 
       // if (messageSuccess) {
       //   this.messageSending = false;
@@ -100,7 +105,7 @@ export class ContactComponent implements OnInit {
 
             if (messageSuccess) {
               this.messageSending = false;
-              return this.sendFormData(value);
+              return this.sendFormData(contactFormMessage);
             } else {
               this.messageSending = false;
               return of('No way buddy');
@@ -125,5 +130,9 @@ export class ContactComponent implements OnInit {
 
   async sendFormData(value: any) {
     return this.afs.collection('messages').add(value);
+  }
+
+  ngOnDestroy(): void {
+    this.verificationSub.unsubscribe();
   }
 }
