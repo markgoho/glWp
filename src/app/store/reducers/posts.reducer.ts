@@ -8,14 +8,18 @@ export function selectPostId(c: Post): string {
 
 export const postAdapter = createEntityAdapter<Post>({ selectId: selectPostId });
 
-export interface PostsState extends EntityState<Post> {}
+export interface PostsState extends EntityState<Post> {
+  loaded: boolean;
+}
 
-export const initialState: PostsState = postAdapter.getInitialState();
+export const initialState: PostsState = postAdapter.getInitialState({
+  loaded: false,
+});
 
 export function postsReducer(state: PostsState = initialState, action: PostsActions): PostsState {
   switch (action.type) {
     case PostsActionTypes.AddAllPosts: {
-      return postAdapter.addAll(action.payload, state);
+      return postAdapter.addAll(action.payload, { ...state, loaded: true });
     }
 
     default:

@@ -17,6 +17,11 @@ export const getPostEntities = createSelector(
   entities => entities
 );
 
+export const loaded = createSelector(
+  getPostsState,
+  state => state.loaded
+);
+
 export const getRecentPosts = createSelector(
   getAllPosts,
   (posts: Post[]) => {

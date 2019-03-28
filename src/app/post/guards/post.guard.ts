@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { take, map, tap } from 'rxjs/operators';
+import { map, tap, filter, withLatestFrom } from 'rxjs/operators';
 
 import { PostsService } from '../../posts.service';
 
@@ -13,9 +13,12 @@ export class PostGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot): Observable<boolean> {
     const slug = next.paramMap.get('postSlug');
 
-    return this.postsService.postEntities$.pipe(
-      take(1),
-      map(entities => !!entities[slug]),
+    const loaded$ = this.postsService.loaded$.pipe(filter(Boolean));
+    const post$ = this.postsService.postEntities$.pipe(map(entities => !!entities[slug]));
+
+    return loaded$.pipe(
+      withLatestFrom(post$),
+      map(([postsLoaded, postExists]) => postsLoaded && postExists),
       tap((postExists: boolean) => {
         if (!postExists) {
           this.router.navigate(['/404']);

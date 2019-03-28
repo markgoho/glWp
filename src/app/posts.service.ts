@@ -12,6 +12,7 @@ import {
   getAllPosts,
   getPostsByCategory,
   getPostEntities,
+  loaded,
 } from './store/selectors/posts.selectors';
 import { Title } from '@angular/platform-browser';
 import { Dictionary } from '@ngrx/entity';
@@ -29,6 +30,7 @@ export class PostsService {
   );
   postsByCategory$: Observable<Post[]> = this.store.pipe(select(getPostsByCategory));
   postEntities$: Observable<Dictionary<Post>> = this.store.pipe(select(getPostEntities));
+  loaded$: Observable<boolean> = this.store.pipe(select(loaded));
 
   constructor(
     private afs: AngularFirestore,
