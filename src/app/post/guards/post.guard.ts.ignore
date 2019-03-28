@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { take, map, tap } from 'rxjs/operators';
 
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PostsService } from '../../posts.service';
 
 @Injectable({
@@ -10,16 +10,18 @@ import { PostsService } from '../../posts.service';
 })
 export class PostGuard implements CanActivate {
   constructor(private postsService: PostsService, private router: Router) {}
-  canActivate(next: ActivatedRouteSnapshot): Observable<boolean> {
-    const slug = next.paramMap.get('postSlug');
+
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
+    // return of(true | false)
+    const slug = route.paramMap.get('postSlug');
 
     return this.postsService.postEntities$.pipe(
-      take(1),
-      map(entities => !!entities[slug]),
-      tap((postExists: boolean) => {
-        if (!postExists) {
+      map(posts => {
+        if (!!posts[slug] === false) {
           this.router.navigate(['/404']);
         }
+
+        return !!posts[slug];
       })
     );
   }
