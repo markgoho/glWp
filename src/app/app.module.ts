@@ -8,8 +8,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirePerformanceModule } from '@angular/fire/performance';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +26,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
 export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, NavbarComponent, SearchComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    NavbarComponent,
+    SearchComponent,
+    NotFoundComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,6 +48,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production ? [store
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
     SharedModule,
+    AngularFirePerformanceModule,
   ],
   bootstrap: [AppComponent],
 })

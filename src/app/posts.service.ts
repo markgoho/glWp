@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { PostsState } from './store/reducers/posts.reducer';
 import { Store, select } from '@ngrx/store';
@@ -16,6 +15,7 @@ import {
 } from './store/selectors/posts.selectors';
 import { Title } from '@angular/platform-browser';
 import { Dictionary } from '@ngrx/entity';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',

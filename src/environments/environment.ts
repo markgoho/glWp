@@ -11,6 +11,7 @@ export const environment = {
     projectId: 'gideonlabs-b4b71',
     storageBucket: 'gideonlabs-b4b71.appspot.com',
     messagingSenderId: '90162579237',
+    appId: '1:90162579237:web:66e4da2213395964',
   },
 };
 

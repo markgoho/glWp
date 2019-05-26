@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { map, filter, tap } from 'rxjs/operators';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 
 import { CategoriesState } from './store/reducers/categories.reducer';
 import { Category } from './category/models/category.interface';

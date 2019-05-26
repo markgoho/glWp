@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Title } from '@angular/platform-browser';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { HttpClient } from '@angular/common/http';
