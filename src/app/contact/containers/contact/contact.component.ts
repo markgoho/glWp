@@ -3,8 +3,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Title } from '@angular/platform-browser';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { filter, map, switchMap, tap, catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { switchMap, catchError } from 'rxjs/operators';
 import { Observable, Subscription, of } from 'rxjs';
 import { firestore } from 'firebase/app';
 
@@ -36,8 +36,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     private afs: AngularFirestore,
     private titleService: Title,
     private recaptcha: ReCaptchaV3Service,
-    private http: HttpClient,
-    private cdr: ChangeDetectorRef
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -54,32 +53,6 @@ export class ContactComponent implements OnInit, OnDestroy {
     });
   }
 
-  // async submitForm(): Promise<void> {
-  //   if (this.contactForm.valid) {
-  //     const { value } = this.contactForm;
-  //     this.messageSending = true;
-
-  //     const token = await this.recaptcha.execute('contact').toPromise();
-  //     const verification: VerificationResponse = await this.http
-  //       .get<VerificationResponse>(
-  //         `https://us-central1-gideonlabs-b4b71.cloudfunctions.net/verifyRecaptcha?token=${token}`
-  //       )
-  //       .toPromise();
-
-  //     this.messageError = verification.success;
-
-  //     if (verification.score && verification.score > 0.9) {
-  //       await this.afs.collection('messages').add(value);
-  //       this.messageSending = false;
-  //       this.messageSent = true;
-  //     } else {
-  //       this.messageSent = false;
-  //       this.messageSending = false;
-  //     }
-
-  //     this.contactForm.reset();
-  // }
-
   submitForm(): void {
     if (this.contactForm.valid) {
       this.formSubmitted = true;
@@ -90,11 +63,6 @@ export class ContactComponent implements OnInit, OnDestroy {
         submitted: firestore.Timestamp.fromDate(new Date()),
       };
 
-      // if (messageSuccess) {
-      //   this.messageSending = false;
-      // } else {
-      //   this.messageSending = false;
-      // }
       this.verificationSub = this.getVerification()
         .pipe(
           switchMap(verification => {
@@ -133,6 +101,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.verificationSub.unsubscribe();
+    if (this.verificationSub) {
+      this.verificationSub.unsubscribe();
+    }
   }
 }
