@@ -10,7 +10,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFirePerformanceModule } from '@angular/fire/performance';
+// import { AngularFirePerformanceModule } from '@angular/fire/performance';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,7 +48,7 @@ export const metaReducers: MetaReducer<any>[] = !environment.production ? [store
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
     SharedModule,
-    AngularFirePerformanceModule,
+    // AngularFirePerformanceModule,
   ],
   bootstrap: [AppComponent],
 })

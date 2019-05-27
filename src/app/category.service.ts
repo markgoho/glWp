@@ -44,8 +44,9 @@ export class CategoryService {
       .snapshotChanges()
       .pipe(
         map((arr: DocumentChangeAction<Category>[]) => {
-          return arr.map(doc => {
+          return arr.map((doc: DocumentChangeAction<Category>) => {
             const data = doc.payload.doc.data();
+
             return { id: doc.payload.doc.id, ...data };
           });
         })

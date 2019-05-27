@@ -49,7 +49,7 @@ export class PostsService {
       .pipe(
         map((arr: DocumentChangeAction<Post>[]) => {
           return arr.map(doc => {
-            const data = doc.payload.doc.data();
+            const data = doc.payload.doc.data() as Post;
             return { id: doc.payload.doc.id, ...data };
           });
         })
