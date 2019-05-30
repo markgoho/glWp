@@ -6,25 +6,25 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: './home/home.module#HomeModule',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
     data: { depth: 0 },
   },
   {
     path: 'contact',
-    loadChildren: './contact/contact.module#ContactModule',
+    loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
   },
   {
     path: 'history',
-    loadChildren: './history/history.module#HistoryModule',
+    loadChildren: () => import('./history/history.module').then(m => m.HistoryModule),
   },
   {
     path: 'posts/category',
-    loadChildren: './category/category.module#CategoryModule',
+    loadChildren: () => import('./category/category.module').then(m => m.CategoryModule),
     data: { depth: 1 },
   },
   {
     path: 'posts',
-    loadChildren: './post/post.module#PostModule',
+    loadChildren: () => import('./post/post.module').then(m => m.PostModule),
     data: { depth: 1 },
   },
   {

@@ -41,7 +41,7 @@ export class SearchComponent implements OnInit {
 
   constructor(public searchService: SearchService, private el: ElementRef) {}
 
-  @ViewChild('searchInput') searchInput: ElementRef;
+  @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
 
   @HostListener('document:keydown', ['$event'])
   keyDownHandler(e: KeyboardEvent) {
