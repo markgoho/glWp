@@ -40,7 +40,7 @@
     "@angular/cli": "^8.0.1",
     "@angular/compiler-cli": "^8.0.0",
     "@angular/language-service": "^8.0.0",
-    "@angular/pwa": "^0.13.9",
+    "@angular/pwa": "^0.800.1",
     "@ngrx/store-devtools": "^7.4.0",
     "@types/algoliasearch": "^3.30.12",
     "@types/jasmine": "^3.3.9",
