@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./history/history.module').then(m => m.HistoryModule),
   },
   {
+    path: 'for-sale',
+    loadChildren: () => import('./for-sale/for-sale.module').then(m => m.ForSaleModule),
+  },
+  {
     path: 'posts/category',
     loadChildren: () => import('./category/category.module').then(m => m.CategoryModule),
     data: { depth: 1 },
