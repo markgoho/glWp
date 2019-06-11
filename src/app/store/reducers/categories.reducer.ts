@@ -1,6 +1,7 @@
-import { CategoriesActionTypes, CategoriesActions } from '../actions/categories.actions';
 import { Category } from '../../category/models/category.interface';
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
+import { addCategories } from '../actions/categories.actions';
 
 export function selectCategoryId(c: Category): string {
   return c.slug;
@@ -12,16 +13,7 @@ export interface CategoriesState extends EntityState<Category> {}
 
 export const initialState: CategoriesState = categoryAdapter.getInitialState();
 
-export function categoriesReducer(
-  state: CategoriesState = initialState,
-  action: CategoriesActions
-): CategoriesState {
-  switch (action.type) {
-    case CategoriesActionTypes.AddAllCategories: {
-      return categoryAdapter.addAll(action.payload, state);
-    }
-
-    default:
-      return state;
-  }
-}
+export const categoriesReducer = createReducer(
+  initialState,
+  on(addCategories, (state, { categories }) => categoryAdapter.addAll(categories, state))
+);
