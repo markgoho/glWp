@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule, MetaReducer } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { storeFreeze } from 'ngrx-store-freeze';
+
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -22,8 +22,6 @@ import { CustomSerializer } from './store/reducers/router.reducer';
 import { SearchComponent } from './search/search.component';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-
-export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 
 @NgModule({
   declarations: [
@@ -43,7 +41,9 @@ export const metaReducers: MetaReducer<any>[] = !environment.production ? [store
     ServiceWorkerModule.register('/ngsw-worker.js', {
       enabled: environment.production,
     }),
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: { strictStateImmutability: true, strictActionImmutability: true },
+    }),
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
     !environment.production ? StoreDevtoolsModule.instrument({ maxAge: 25 }) : [],
