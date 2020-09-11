@@ -19,7 +19,7 @@
     "firebase-functions": "^2.3.0",
     "mailgun-js": "^0.22.0",
     "memory-cache": "^0.2.0",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.1",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7"
   },
